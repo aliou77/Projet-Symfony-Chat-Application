@@ -4,4 +4,531 @@
 
 {% block body %}
 
+    <main id="root">
+        <header>
+            <nav class="nav-content">
+                <div class="slide-menu">
+                    <nav-tabs id="tab">
+                        <a href="#profile" class="user-profile-img">
+                            <img src="./img/profile.jpg" alt="profile image">
+                        </a>
+                        <div class="show-hide-arrow">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </div>
+                        <a href="#message" title="Message"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+                            </svg>
+                        </a>
+                        <a href="#contact" title="Contats"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                            </svg>
+                        </a>
+                        <a href="#profile" title="Profile"> 
+                            <i class="fa-regular fa-circle-user"></i>
+                        </a>
+                        <a href="#setting" title="Settings"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </a>
+                    </nav-tabs>
+                </div>
+            </nav>
+        </header>
+        
+        <main class="main-content">
+            <section class="chat-slide-menu">
+                <div class="tabs-content">
+                    <div id="message" class="tabcontent">
+                        <h3>Chats</h3>
+                        <div class="search-bar">
+                            <form action="" method="post" id="form-search">
+                                <input type="search" placeholder="Search or start new discussion...">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </form>
+                        </div>
+                        <div class="all-users">
+                            <h3>All users</h3>
+                            <a href="#">
+                                <div class="user">
+                                    <div class="user-img">
+                                        <img src="./img/back.jpg" alt="user image">
+                                        <span class="user-active"></span>
+                                    </div>
+                                    <div class="user-detail">
+                                        <h4>Mamadou</h4>
+                                        <p>Slt bro c comment ?</p>
+                                    </div>
+                                    <div class="msg-waiting"><span>9</span></div>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="user">
+                                    <div class="user-img">
+                                        <img src="./img/back.jpg" alt="user image">
+                                    </div>
+                                    <div class="user-detail">
+                                        <h4>Mamadou</h4>
+                                        <p>Slt bro c comment ?</p>
+                                    </div>
+                                    <div class="msg-waiting"><span>9</span></div>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="user">
+                                    <div class="user-img">
+                                        <img src="./img/back.jpg" alt="user image">
+                                    </div>
+                                    <div class="user-detail">
+                                        <h4>Mamadou</h4>
+                                        <p>Slt bro c comment ?</p>
+                                    </div>
+                                    <div class="msg-waiting"><span>9</span></div>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="user">
+                                    <div class="user-img">
+                                        <img src="./img/back.jpg" alt="user image">
+                                    </div>
+                                    <div class="user-detail">
+                                        <h4>Mamadou</h4>
+                                        <p>Slt bro c comment ?</p>
+                                    </div>
+                                    <div class="msg-waiting"><span>9</span></div>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="user">
+                                    <div class="user-img">
+                                        <img src="./img/back.jpg" alt="user image">
+                                    </div>
+                                    <div class="user-detail">
+                                        <h4>Mamadou</h4>
+                                        <p>Slt bro c comment ?</p>
+                                    </div>
+                                    <div class="msg-waiting"><span>9</span></div>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="user">
+                                    <div class="user-img">
+                                        <img src="./img/back.jpg" alt="user image">
+                                    </div>
+                                    <div class="user-detail">
+                                        <h4>Mamadou</h4>
+                                        <p>Slt bro c comment ?</p>
+                                    </div>
+                                    <div class="msg-waiting"><span>9</span></div>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="user">
+                                    <div class="user-img">
+                                        <img src="./img/back.jpg" alt="user image">
+                                    </div>
+                                    <div class="user-detail">
+                                        <h4>Mamadou</h4>
+                                        <p>Slt bro c comment ?</p>
+                                    </div>
+                                    <div class="msg-waiting"><span>9</span></div>
+                                </div>
+                            </a>
+                            <div id="end">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="contact" class="tabcontent"  hidden="hidden">
+                        <h3>Contact</h3>
+                        <div class="search-bar">
+                            <form action="" method="post" id="form-search">
+                                <input type="search" placeholder="Search or start new discussion...">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </form>
+                        </div>
+                        <div class="contacts-content">
+                            <div class="sort-letter">
+                                <p>A</p>
+                                <span></span>
+                            </div>
+                            <div class="contact">
+                                <div class="contact-info">
+                                    <img src="./img/back.jpg" alt="thierno amadou">
+                                    <p>Amadou diallo</p>
+                                </div>
+                                <div class="more">
+                                    <svg id="btn-dropdown" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                                    </svg>
+                                    <div id="dropdown" class="dropdown">
+                                        <div class="dropdown-item">
+                                            <a href="#">Delete
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </a>
+                                        </div>
+                                        <div class="dropdown-item">
+                                            <a href="#">Block
+                                                <i class="fa-solid fa-ban"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contact">
+                                <div class="contact-info">
+                                    <img src="./img/back.jpg" alt="Aissatou diallo">
+                                    <p>Aissatou diallo</p>
+                                </div>
+                                <div class="more">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="sort-letter">
+                                <p>B</p>
+                                <span></span>
+                            </div>
+                            <div class="contact">
+                                <div class="contact-info">
+                                    <img src="./img/back.jpg" alt="Aissatou diallo">
+                                    <p>Bathieu malt</p>
+                                </div>
+                                <div class="more">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="contact">
+                                <div class="contact-info">
+                                    <img src="./img/back.jpg" alt="Aissatou diallo">
+                                    <p>Bassirou diallo</p>
+                                </div>
+                                <div class="more">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="contact">
+                                <div class="contact-info">
+                                    <img src="./img/back.jpg" alt="Aissatou diallo">
+                                    <p>Bassirou diallo</p>
+                                </div>
+                                <div class="more">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="contact">
+                                <div class="contact-info">
+                                    <img src="./img/back.jpg" alt="Aissatou diallo">
+                                    <p>Bassirou diallo</p>
+                                </div>
+                                <div class="more">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="contact">
+                                <div class="contact-info">
+                                    <img src="./img/back.jpg" alt="Aissatou diallo">
+                                    <p>Bassirou diallo</p>
+                                </div>
+                                <div class="more">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="profile" class="tabcontent" hidden="hidden">
+                        <div class="profile-back">
+                            <div class="content-back">
+                                <div class="content">
+                                    <h1>My Pofile</h1>
+                                </div>
+                                <div class="profile-img">
+                                    <img src="img/profile.jpg" width="35" height="35" alt="My profile">
+                                </div>
+                            </div>
+                            
+                            <div class="profile-desc">
+                                <h2>Mamadou Aliou Diallo</h2>
+                                <p>Developpeur Full Stack</p>
+                            </div>
+                            <div class="profile-details">
+                                <div class="detail-item">
+                                    <h3>Phone</h3>
+                                    <p>+221 78 254 12 12</p>
+                                </div>
+                                <div class="detail-item">
+                                    <h3>Email</h3>
+                                    <p>mamadou@aliou.com</p>
+                                </div>
+                                <div class="detail-item">
+                                    <h3>Status</h3>
+                                    <p>Online</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="setting" class="tabcontent"  hidden="hidden">
+                        <div class="content-back">
+                            <div class="content">
+                                <h2>Setting</h2>
+                                <div class="edite">
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+                            </div>
+                            <div class="profile-img">
+                                <img src="img/profile.jpg" width="35" height="35" alt="My profile">
+                                <div class="camera">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-camera"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-desc">
+                            <h2>Mamadou Aliou Diallo</h2>
+                            <p>Actif</p>
+                        </div>
+                        <div class="parameters">
+                            <div class="parameter">
+                                <div class="button-accordion">
+                                    <i class="fa-solid fa-user"></i>
+                                    <button id="accordion">Personal info</button>
+                                </div>
+                                <div class="panel">
+                                    <form action="#" method="post" id="form-setting">
+                                        <div class="form-item">
+                                            <label for="fname">Frist Name</label>
+                                            <input type="text" name="fname" id="fname" value="Mamadou aliou">
+                                        </div>
+                                        <div class="form-item">
+                                            <label for="lname">Last name</label>
+                                            <input type="text" name="lname" id="lname" value="Diallo">
+                                        </div>
+                                        <div class="form-item">
+                                            <label for="email">Email</label>
+                                            <input type="email" name="email" id="email" value="mamadou@aliou.com">
+                                        </div>
+                                        <div class="form-item">
+                                            <label for="description">Description</label>
+                                            <input type="text" id="description" name="description" value="My description">
+                                        </div>
+                                        <button type="button"><i class="fa-solid fa-check"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="parameter">
+                                <div class="button-accordion">
+                                    <i class="fa-solid fa-shield"></i>
+                                    <button id="accordion">Security</button>
+                                </div>
+                                <div class="panel">
+                                    <div class="security">
+                                        <div class="logo">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                                            </svg>
+                                        </div>
+                                        <h4>Your chats and data are protected</h4>
+                                        <div class="security-desc">
+                                            <p>End-to-end encryption keeps your personal messages between you and the 
+                                                people you choose to communicate with. Even Us does not have access to it. This includes :
+                                            </p>
+                                            <ul>
+                                                <li>Audio and text messages</li>
+                                                <li>Photos and videos</li>
+                                                <li>Share location</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="parameter">
+                                <div class="button-accordion">
+                                    <i class="fa-solid fa-palette"></i>
+                                    <button id="accordion">Themes</button>
+                                </div>
+                                <div class="panel">
+                                    <div class="themes">
+                                        <div class="light">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                                            </svg>
+                                        </div>
+                                        <div class="dark active">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="parameter">
+                                <div class="button-accordion">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    <button id="accordion">Help</button>
+                                </div>
+                                <div class="panel">
+                                    <div class="help">
+                                        <p><a href="#">Contact us</a></p>
+                                        <p><a href="#">Terms & Privacy policy</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="logout"><a href="#">Log Out</a></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="user-chat">
+                <div class="get-started">
+                    <div class="content">
+                        <div class="logo">
+                            <i class="fa-solid fa-face-smile"></i>
+                        </div>
+                        <h2>Welcome to Chaap</h2>
+                        <p>chat with friends and family safely</p>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum, quasi. Lorem ipsum dolor sit.</p>
+                        <button type="button">Get Started</button>
+                    </div>
+                </div>
+
+                <div class="chat-section">
+                    <div class="header">
+                        <div class="user-status">
+                            <div class="user-status-img">
+                                <img src="./img/back.jpg" alt="">
+                            </div>
+                            <div class="user-details">
+                                <h3>Thierno Amadou</h3>
+                                <p>Online</p>
+                            </div>
+                        </div>
+                        <div class="icons">
+                            <!-- <div class="video">
+                                <i class="fa-solid fa-video"></i>
+                            </div> -->
+                            <!-- <div class="phone">
+                                <i class="fa-solid fa-phone"></i>
+                            </div> -->
+                            <div class="more">
+                                <i class="fa-solid fa-circle-info" id="open-profile"></i>
+                            </div>
+                            <div id="modal-user">
+                                <div class="profile-back">
+                                    <div class="content-back">
+                                        <div class="content">
+                                            <div id="close-profile">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="profile-desc">
+                                        <h2>Mamadou Aliou Diallo</h2>
+                                        <p>Developpeur Full Stack</p>
+                                    </div>
+                                    <div class="profile-details">
+                                        <div class="detail-item">
+                                            <h3>Phone</h3>
+                                            <p>+221 78 254 12 12</p>
+                                        </div>
+                                        <div class="detail-item">
+                                            <h3>Email</h3>
+                                            <p>mamadou@aliou.com</p>
+                                        </div>
+                                        <div class="detail-item">
+                                            <h3>Status</h3>
+                                            <p>Online</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div class="receive">
+                            <div class="receive-img">
+                                <img src="./img/back.jpg" alt="">
+                            </div>
+                            <p>comment allez-vous ? <span id="hour">12:23</span></p>
+                        </div>
+                        <div class="send">
+                            <p>Bonjour </p>
+                        </div>
+                        <div class="receive">
+                            <div class="receive-img">
+                                <img src="./img/back.jpg" alt="">
+                            </div>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, eum architecto. Unde eligendi esse, quos et corrupti at, ipsum, quaerat illum voluptates similique eum odit cupiditate debitis deleniti natus accusamus.</p>
+                        </div>
+                        <div class="send">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio o <span id="hour">16:23</span></p>
+                        </div>
+                        <div class="receive">
+                            <div class="receive-img">
+                                <img src="./img/back.jpg" alt="">
+                            </div>
+                            <p>comment allez-vous ? </p>
+                        </div>
+                        <div class="send">
+                            <p>Bonjour </p>
+                        </div>
+                        <div class="receive">
+                            <div class="receive-img">
+                                <img src="./img/back.jpg" alt="">
+                            </div>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate recusandae architecto accusamus cumque vero explicabo odio necessitatibus fugit placeat accusantium pariatur aperiam libero commodi et cum eligendi fuga, deserunt esse. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi tenetur accusamus ab unde voluptatem blanditiis error. Voluptatum nulla, eveniet error aut in minima esse quaerat neque sit atque adipisci debitis. </p>
+                        </div>
+                        <div class="send">
+                            <p>Bonjour </p>
+                        </div>
+                        <div class="send">
+                            <img class="img-chat" src="./img/back.jpg" alt="">
+                        </div>
+                        <div class="receive">
+                            <div class="receive-img">
+                                <img src="./img/back.jpg" alt="">
+                            </div>
+                            <img class="img-chat" src="./img/back.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="emoji">
+                            <i class="fa-regular fa-face-smile-beam"></i>
+                        </div>
+                        <div class="link">
+                            <i class="fa-solid fa-paperclip"></i>
+                        </div>
+                        <div class="form-chat" id="form-chat">
+                            <form action="#" method="post" id="form-chat">
+                                <input type="text" placeholder="Tape a message...">
+                            </form>
+                        </div>
+                        <div class="microphone">
+                            <i class="fa-solid fa-microphone"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </main>
+    <footer>
+        <p>Copyright © 2023. All Rights Reserved.</p>
+    </footer>
 {% endblock %}

@@ -192,6 +192,7 @@ $(document).ready(function(){
                     $(dark).addClass("active")
                     $(light).removeClass("active")
                     $("#root").removeClass("active")
+                    $("footer").removeClass("active")
                 }
             })
 
@@ -200,6 +201,7 @@ $(document).ready(function(){
                     $(light).addClass("active")
                     $(dark).removeClass("active")
                     $("#root").addClass("active")
+                    $("footer").addClass("active")
                 }
             })
         }
