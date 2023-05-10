@@ -15,7 +15,7 @@
 } 
 body{
     overflow-x: hidden;
-    background-color: black;
+    background-color: black !important;
     @include config-scrolbar-body();
 }
 a{
@@ -120,10 +120,15 @@ to {opacity: 1;}
 //          CSS homepage           
 // ----------------------------- //
 
+header .nav-content{
+    height: 100vh;
+}
 .chat-slide-menu{
+    border-radius: 0;
+    padding: 0;
     transition: all .5s;
     &.active{
-        transform: translateX(-24rem);
+        transform: translateX(-50rem);
     }
 }
 .tabs-content{
@@ -710,6 +715,8 @@ to {opacity: 1;}
     background-color: rgba(255, 254, 254, 0.792);
     background-image: url("../back\ svgs/topography.svg");
     background-size: cover;
+    padding: 0;
+    border-radius: 0;
     .get-started{
         height: 100vh;
         display: none;
@@ -772,7 +779,9 @@ to {opacity: 1;}
         justify-content: space-between;
         align-items: center;
         padding: 10px;
-        box-shadow: 16px -3px 23px 3px gray;
+        box-shadow: 11px 1px 14px 8px gray;
+        margin: 0;
+        border-bottom: 0;
         .user-status{
             display: flex;
             align-items: center;
@@ -838,7 +847,7 @@ to {opacity: 1;}
                 background-color: $light-color;
                 border-radius: 30px 32px 0;
                 // margin: 10px 0;
-                box-shadow: -4px 3px 11px -5px white;
+                box-shadow: -3px 2px 9px -6px white;
             }
             #hour{
                 font-size: 14px;
@@ -870,7 +879,7 @@ to {opacity: 1;}
                 background-color: $dark-light-color;
                 border-radius: 0 30px 30px 30px;
                 margin: 15px 0 0 5px;
-                box-shadow: 4px 5px 11px -3px gray;
+                box-shadow: 2px 1px 14px -6px gray;
             }
             #hour{
                 font-size: 14px;
@@ -930,7 +939,7 @@ to {opacity: 1;}
 
 #modal-user{
     position: absolute;
-    top: -24px;
+    top: -26px;
     right: 0;
     width: 20rem;
     height: 100vh;
@@ -945,6 +954,9 @@ to {opacity: 1;}
     }
     #close-profile{
         cursor: pointer;
+        svg{
+            color: white;
+        }
     }
     .profile-back{
         position: relative;
@@ -1073,6 +1085,12 @@ to {opacity: 1;}
         }
    }
    #setting{
+        .profile-desc{
+            h2{
+                color: black;
+            }
+        }
+        
         button, svg{
             color: #2b2b2b;
         }
@@ -1155,22 +1173,38 @@ to {opacity: 1;}
    .user-chat{
         background-color: #2b2b2b;
    }
+
+   #modal-user{
+        background-color: white;
+        .profile-back h2{
+            color: black;
+        }
+   }
+   footer{
+        color: black;
+        background-color: $light-color;
+   }
 }
 
-// footer{
-//     height: 20px;
-//     background-color: #b30000;
-//     text-align: center;
-//     color: white;
-//     font-size: 19px;
-// }
+footer{
+    height: 20px;
+    padding: 20px 0 27px;
+    background-color: black;
+    text-align: center;
+    color: white;
+    font-size: 19px;
+    &.active{
+        background-color: $light-color;
+        color: black;
+    }
+}
 
 /* media queries */
 
 @media screen and (max-width: 990px){
-    .user-chat{
-        background-color: red;
-    }
+    // .user-chat{
+    //     background-color: red;
+    // }
 }
 @media screen and (max-width: 500px){
     .chat-section{
