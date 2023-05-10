@@ -7,9 +7,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
-class Users
+class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,21 +21,27 @@ class Users
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 5, minMessage: "Name is too short" )]
     private ?string $fname = null;
 
     #[ORM\Column(length: 255)]
+    // #[Assert\Length(min: 5, minMessage: "Name is too short !" )]
     private ?string $lname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Assert\Email(message: "Invalid email !")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Regex(pattern: " /^\+221[0-9]{9}/ ", message: "invalid number !")]
     private ?string $phone = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 5, minMessage: "Password is too short !" )]
     private ?string $password = null;
 
-    #[ORM\Column]
+    #[ORM\Column(options: ['default' => "0"])]
     private ?bool $status = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -51,6 +61,21 @@ class Users
         $this->messages = new ArrayCollection();
         $this->usersBlockeds = new ArrayCollection();
         $this->usersDeleteds = new ArrayCollection();
+    }
+
+    public function getRoles(): array
+    {
+        return [];
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return "";
+    }
+    
+    public function eraseCredentials()
+    {
+        
     }
 
     public function getId(): ?int
@@ -184,7 +209,7 @@ class Users
     {
         if (!$this->usersBlockeds->contains($usersBlocked)) {
             $this->usersBlockeds->add($usersBlocked);
-            $usersBlocked->addUserBlokingId($this);
+            $usersBlocked->addUserBlockingId($this);
         }
 
         return $this;
@@ -224,5 +249,30 @@ class Users
         }
 
         return $this;
+    }
+
+    /**
+     * transforme l'objet en chaine 
+     */
+    public function serialize()
+    {
+        // on return les infos qu'on veut conserver au niveau du user
+        return serialize([
+            $this->id,
+            $this->email,
+            $this->password
+        ]);
+    }
+    /**
+     * transforme la chaine en objet 
+     */
+    public function unserialize(string $data_serialise)
+    {
+        // genraliser un user apartir des information serialiser, les rendre en objet (User)
+        list(
+            $this->id,
+            $this->email,
+            $this->password
+        ) = unserialize($data_serialise, ['allow_classes' => false]); // false pour ne pas instancier les classes dans la unserialisation
     }
 }

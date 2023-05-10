@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block body %}
+    <main>
+        <section>
+            <div class="header">
+                <h1>Chaap - Sign Up</h1>
+            </div>
+            <div id="form-signup">
+                {{ form_start(form) }}
+                    <div class="form-item">
+                        {{ form_row(form.fname) }}
+                        {{ form_row(form.lname) }}
+                    </div>
+                    <div class="form-item">
+                        {{ form_row(form.email) }}
+                    </div>
+                    <div class="form-item">
+                        {{ form_row(form.phone) }}
+                    </div>
+                    <div class="form-item" id="password">
+                        {{ form_row(form.password.first) }}
+                        <div id="eye">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        {{ form_row(form.password.second) }}
+                        {# <input id="comfirm_password" type="password" name="password" placeholder="Confirm password"> #}
+                    </div>
+                    <div class="form-item">
+                        {{ form_row(form.description) }}
+                    </div>
+                    <button type="submit">Sign Up</button>
+                    <div class="footer">
+                        <p>you already have a acount? <a href="{{ path('login')}}">Log In</a></p>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </section>
+    </main>
+{% endblock %}
