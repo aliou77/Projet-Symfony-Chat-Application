@@ -6,7 +6,7 @@
     <main>
         <section>
             <div class="header">
-                <h1>Chaap - Sign Up</h1>
+                <h1><a href="{{path('home')}}">Chaap - Sign Up</a></h1>
             </div>
             <div id="form-signup">
                 {{ form_start(form) }}
@@ -28,10 +28,10 @@
                     </div>
                     <div class="form-item">
                         {{ form_row(form.password.second) }}
-                        {# <input id="comfirm_password" type="password" name="password" placeholder="Confirm password"> #}
+                        {# <input type="file" name="profile_img"> #}
                     </div>
                     <div class="form-item">
-                        {{ form_row(form.description) }}
+                        {{ form_row(form.imageFile) }}
                     </div>
                     <button type="submit">Sign Up</button>
                     <div class="footer">

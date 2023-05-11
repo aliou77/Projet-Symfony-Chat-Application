@@ -7,14 +7,28 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Serializable;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
+#[Vich\Uploadable]
 class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    #[Vich\UploadableField(mapping: "profile_img", fileNameProperty: "profile_img", size: "imageSize")]
+    #[Assert\NotBlank()]
+    #[Assert\Image(mimeTypes: ['image/jpeg', 'image/jpg'])]
+    #[Assert\Image(maxSize: '2M')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $imageSize = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -45,6 +59,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private ?bool $status = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\Length(min: 50, minMessage: "Max. length: 50 !" )]
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'sender_id', targetEntity: Messages::class, orphanRemoval: true)]
@@ -56,6 +71,12 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: UsersDeleted::class, mappedBy: 'user_deleting_id')]
     private Collection $usersDeleteds;
 
+    #[ORM\Column(length: 255)]
+    private ?string $profile_img = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $back_img = null;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
@@ -65,7 +86,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        return [];
+        return ["ROLE_USER"];
     }
 
     public function getUserIdentifier(): string
@@ -274,5 +295,88 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
             $this->email,
             $this->password
         ) = unserialize($data_serialise, ['allow_classes' => false]); // false pour ne pas instancier les classes dans la unserialisation
+    }
+
+    public function getProfileImg(): ?string
+    {
+        return $this->profile_img;
+    }
+
+    public function setProfileImg(string $profile_img): self
+    {
+        $this->profile_img = $profile_img;
+
+        return $this;
+    }
+
+    public function getBackImg(): ?string
+    {
+        return $this->back_img;
+    }
+
+    public function setBackImg(string $back_img): self
+    {
+        $this->back_img = $back_img;
+
+        return $this;
+    }
+
+    /*
+    * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+    */
+   public function setImageFile(?File $imageFile = null): void
+   {
+       $this->imageFile = $imageFile;
+
+       if (null !== $imageFile) {
+           // It is required that at least one field changes if you are using doctrine
+           // otherwise the event listeners won't be called and the file is lost
+           $this->updatedAt = new \DateTimeImmutable();
+       }
+   }
+
+   public function getImageFile(): ?File
+   {
+       return $this->imageFile;
+   }
+
+    /**
+     * Get the value of imageSize
+     */ 
+    public function getImageSize()
+    {
+        return $this->imageSize;
+    }
+
+    /**
+     * Set the value of imageSize
+     *
+     * @return  self
+     */ 
+    public function setImageSize($imageSize)
+    {
+        $this->imageSize = $imageSize;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of updatedAt
+     */ 
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set the value of updatedAt
+     *
+     * @return  self
+     */ 
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

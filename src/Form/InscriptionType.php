@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Users;
+use Liip\ImagineBundle\Form\Type\ImageType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -50,11 +52,9 @@ class InscriptionType extends AbstractType
                 'first_options'  => ['label' => false, 'attr' => ['placeholder' => 'Password']],
                 'second_options' => ['label' => false, 'attr' => ['placeholder' => 'Comfirm Password']],
             ])
-            ->add('description', TextType::class, [
-                'label' => false,
-                'attr' => [
-                    'placeholder' => "Describe your self in few words..."
-                ]
+            ->add("imageFile", FileType::class, [
+                'label' => "Choose a image profile",
+                'required' => false
             ])
         ;
     }

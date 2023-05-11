@@ -20,11 +20,16 @@ security:
         main:
             lazy: true
             provider: my_entity_provider # utiliser mon_provider aulieu du #users_in_memory
+            # form_login:
+            #     login_path: 'login'
+            #     check_path: 'login' # chemin utiliser pour la verification du user
+
             custom_authenticator: App\Security\UsersAuthenticator
+            # entry_point: form_login
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
+                target: 'login'
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -36,7 +41,8 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/profile, roles: ROLE_USER }
+        # - { path: ^/profile, roles: ROLE_USER }
+        # - { path: ^/, roles: ROLE_USER }
 
 when@test:
     security:
