@@ -180,6 +180,7 @@ $(document).ready(function(){
         createDropdown(btn, item){
             $(btn).on("click", (e)=>{
                 $(item).toggleClass("active")
+                console.log("click")
             })
         }
 
