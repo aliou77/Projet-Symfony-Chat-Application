@@ -9,11 +9,14 @@
 import './styles/style.scss';
 import './styles/connexion.scss';
 import './fontawesome/css/all.css'; 
-
+// js import
 import './scripts/script';
 import './fontawesome/js/all';
+import './scripts/ajax/SlideBarDatas'
+// import SlideBarDatas from './scripts/ajax/SlideBarDatas'
+
 
 // start the Stimulus application
 import './bootstrap';
 
-// console.log($)
+
