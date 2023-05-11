@@ -14,6 +14,10 @@ class HomePageController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(Request $request): Response
     {
+        if($this->getUser() == null){
+            // si aucun utilisateur est connecter on le renvoie vers la page de login
+            return $this->redirectToRoute("login");
+        }
 
         return $this->render('pages/index.html.twig', [
             'controller_name' => 'HomePageController',
@@ -26,14 +30,14 @@ class HomePageController extends AbstractController
         // render only json data
         // return $this->json(['data' => 'bonjour guys']);
         $contacts = $repo->findUsersByOrder();
-        $sort = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 
-                    'y', 'z'];
+        // $sort = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 
+        //             'y', 'z'];
         // dd($this->getUser());
         // return a jsonView
         return new JsonResponse([
             'content' => $this->renderView('pages/contact.html.twig', [
                 'contacts' => $contacts,
-                'sort' => $sort,
+                // 'sort' => $sort,
                 ])
         ]);
     }

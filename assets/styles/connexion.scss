@@ -35,22 +35,33 @@ section{
         margin-bottom: 20px;
     }
     h1{
-        color: white;
-        font-size: 25px;
         text-align: center;
         margin: 5px 0 15px 0;
-    }
+        a{
+            color: white;
+            font-size: 25px;
+            
+        }
+    } 
 }
 #form-signup form{
     color: white;
     display: flex;
     flex-direction: column;
     width: 100%;
+    input[type="file"]{
+        margin-top: 3px;
+        padding-top: 4px;
+        background-color: $item-color-trans-gray;
+    }
     .form-item{
-        margin: 10px 0;
+        margin: 7px 0;
         position: relative;
         &.invalid > input{
             border-color: red;
+        }
+        label{
+            margin-bottom: 3px;
         }
     }
     .form-item:first-child{
@@ -83,7 +94,7 @@ section{
         transition: all .4s;
         &:focus{
             border: 1px solid white;
-            box-shadow: 1px 3px 7px -1px white;
+            box-shadow: 1px 3px 4px -1px white;
             background-color: white;
             color: black;
         }
@@ -111,7 +122,7 @@ section{
         cursor: pointer;
         border: 1px solid transparent;
         border-radius: 20px;
-        margin: 20px 0;
+        margin: 15px 0;
         background-color: rgba(37, 37, 37, 0.88);
         transition: all .4s;
         &:hover{
