@@ -175,7 +175,7 @@ header .nav-content{
         overflow: hidden;
         img{
             width: 5.2rem;
-            height: auto;
+            height: 5rem;
         }
     }
     .profile-desc{
@@ -187,6 +187,7 @@ header .nav-content{
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 5px;
+            text-transform: capitalize;
         }
         p{
             color: $border-bottom-color;
@@ -395,12 +396,15 @@ header .nav-content{
         align-items: center;
         padding: 15px 0;
         border-bottom: 1px solid $item-color-trans-gray;
+        a{
+            color: white;
+        }
         .contact-info{
             display: flex;
             align-items: center;
             img{
                 width: 50px;
-                height: auto;
+                height: 40px;
                 border-radius: 20%;
                 margin-right: 10px;
             }
@@ -521,6 +525,7 @@ header .nav-content{
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 5px;
+            text-transform: capitalize;
         }
         p{
             color: rgb(45, 194, 65);
@@ -713,14 +718,14 @@ header .nav-content{
 .user-chat{
     color: white;
     width: 100%;
-    background-color: rgba(255, 254, 254, 0.792);
+    background-color: #2b2b2b;
     background-image: url("../back\ svgs/topography.svg");
     background-size: cover;
     padding: 0;
     border-radius: 0;
     .get-started{
         height: 100vh;
-        display: none;
+        display: flex;
         justify-content: center;
         align-items: center;
         text-align: center;
@@ -738,9 +743,12 @@ header .nav-content{
                 transition: all .3s;
                 &:hover{
                     box-shadow: 0 0 10px 5px white;
-                    background-color: black;
+                    background-color: gray;
                 }
             }
+        }
+        h2, p{
+            color: white;
         }
         h2{
             font-size: 2rem;
@@ -752,27 +760,11 @@ header .nav-content{
             line-height: 1.3rem;
             text-transform: capitalize;
         }
-        button{
-            font-size: 18px;
-            color: white;
-            outline: none;
-            border: 1px solid white;
-            border-radius: 20px;
-            cursor: pointer;
-            padding: 15px 30px;
-            margin: 10px 0;
-            background-color: $item-color-trans-gray;
-            transition: all .3s;
-            &:hover{
-                background-color: black;
-                font-weight: bold;
-                box-shadow: 0 0 4px 2px white;
-            }
-        }
     }
 }
 
 .chat-section{
+    display: none;
     // header
     .header{
         background-color: black;
@@ -1054,6 +1046,9 @@ header .nav-content{
             color: black;
         }
     }
+    .user-chat{
+        background-color: #1c1c1ce9;
+    }
    #profile, #message, #contact, #setting{
         background-color: $light-color;
    }
@@ -1076,7 +1071,7 @@ header .nav-content{
         }
    }
    #contact{
-        h3, p, svg, span{
+        h3, p, svg, span, a{
             color: black;
         }
    }
@@ -1171,9 +1166,7 @@ header .nav-content{
             color: white;
         }
    }
-   .user-chat{
-        background-color: #2b2b2b;
-   }
+   
 
    #modal-user{
         background-color: white;
@@ -1181,6 +1174,20 @@ header .nav-content{
             color: black;
         }
    }
+
+   .get-started{
+        .logo{
+            svg{
+                color: $light-color;
+                border: 2px solid white;
+                &:hover{
+                    box-shadow: 0 0 10px 5px $light-color;
+                    background-color: gray;
+                }
+            }
+        }
+        
+    }
 }
 
 footer{

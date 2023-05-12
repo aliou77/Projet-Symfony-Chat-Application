@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
     
     /**
@@ -177,10 +178,12 @@ $(document).ready(function(){
         /**
          * create a dropdown
          */
-        createDropdown(btn, item){
-            $(btn).on("click", (e)=>{
-                $(item).toggleClass("active")
-                console.log("click")
+        createDropdown(btns){
+            console.log(btns)
+            $(btns).each(function(i, btn){
+                $(btn).on("click", (e)=>{
+                    $(btn).next("#dropdown").toggleClass("active")
+                })
             })
         }
 
@@ -250,7 +253,7 @@ $(document).ready(function(){
                 if (!event.target.matches("#btn-dropdown")) {
                     // si l'event du button dropdown est declencher on retire la class active
                     // pour masquer la dropdown
-                    $("#dropdown").removeClass("active")
+                    $(".contacts-content .dropdown").removeClass("active")
                 }
                 if (!event.target.matches("#open-profile")) {
                     $("#close-profile").removeClass("active")
@@ -285,14 +288,16 @@ $(document).ready(function(){
         w.createAccordion($(".parameter #accordion"))
         w.changeAccordionColor($(".parameter .button-accordion"))
         w.hideAndShowSlideMenu($("#tab .show-hide-arrow"), $("main .chat-slide-menu"))
-        w.createDropdown($("#btn-dropdown"), $("#dropdown"))
         w.lightDarkWwitchTheme($("#setting .parameter .dark"), $("#setting .parameter .light"))
         w.hideSowPassword($("#eye"))
         w.createModal($(".chat-section .icons .more"), $(".chat-section #close-profile"))
         w.discardEvents()
         w.enableErrorColor($("#form-signup input"))
+        w.createDropdown($(".contacts-content .btn-dropdown"))
         
     } catch (error) {
         console.log("il ya eu un soucis dans script.js \n" + error)
     }
+
+    
 });

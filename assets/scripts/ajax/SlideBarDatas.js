@@ -6,7 +6,7 @@ $(document).ready(()=>{
 
         constructor(links){
             this.links = links
-            this.bindEvents()
+            // this.bindEvents()
         }
 
         bindEvents(){
@@ -21,15 +21,15 @@ $(document).ready(()=>{
                     }else if($(a).attr("href") === "#message"){
                         // go to /message
                         // this.loadUrl("/messages")
-                        console.log("not worked yet")
+                        // console.log("not worked yet")
                     }else if($(a).attr("href") === "#profile"){
                         // go to /profile
-                        // this.loadUrl("/profile")
-                        console.log("not worked yet")
+                        this.loadUrl("/profile", $("#profile"))
+                        // console.log("not worked yet")
                     }else if($(a).attr("href") === "#setting"){
                         // got to /settings
                         // this.loadUrl("/settings")
-                        console.log("not worked yet")
+                        // console.log("not worked yet")
                     }
                 // })
 
@@ -49,10 +49,18 @@ $(document).ready(()=>{
             if(res.ok){
                 // on recupere les data si tout se passe bien
                 const data = await res.json()
-                $(content).html(data.content);
-                // console.log(data)
+                if(url == "/contact"){
+                    $(content).html(data.content);
+                    this.createDropdown()
+                }
+                if(url == "/profile"){
+                    $(content).html(data.content)
+                    $("#tab a:first-child").html(data.user_img)
+                }
+                
             }
         }
+
     
     }
     new SlideBarDatas($("#tab a"));

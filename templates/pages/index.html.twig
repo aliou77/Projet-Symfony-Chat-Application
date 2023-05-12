@@ -10,7 +10,7 @@
                 <div class="slide-menu">
                     <nav-tabs id="tab">
                         <a href="#profile" class="user-profile-img">
-                            <img src="./img/profile.jpg" alt="profile image">
+                            <img id="nav-profile-img" src="./img/profile.jpg" alt="profile image">
                         </a>
                         <div class="show-hide-arrow">
                             <i class="fa-solid fa-arrow-left"></i>
@@ -45,7 +45,7 @@
                     <div id="message" class="tabcontent">
                         <h3>Chats</h3>
                         <div class="search-bar">
-                            <form action="" method="post" id="form-search">
+                            <form action="" method="post" id="form-search" class="message">
                                 <input type="search" placeholder="Search or start new discussion...">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </form>
@@ -145,13 +145,40 @@
                     <div id="contact" class="tabcontent"  hidden="hidden">
                         <h3>Contact</h3>
                         <div class="search-bar">
-                            <form action="" method="post" id="form-search">
+                            <form action="" method="post" id="form-search" class="contact">
                                 <input type="search" placeholder="Search or start new discussion...">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </form>
                         </div>
                         <div class="contacts-content">
-                            <!-- contacts content -->
+                            {% for contact in contacts %}
+                                <div class="contact">
+                                    <a href="#" title="click to message">
+                                        <div class="contact-info">
+                                            <img src="{{ vich_uploader_asset(contact, 'imageFile') }}" alt="{{contact.fname}} {{ contact.lname }}">
+                                            <p>{{contact.fname }} {{ contact.lname }}</p>
+                                        </div>
+                                    </a>
+                                    <div class="more">
+                                        <svg id="btn-dropdown" class="btn-dropdown" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                                        </svg>
+                                        <div id="dropdown" class="dropdown">
+                                            <div class="dropdown-item">
+                                                <a href="#">Delete
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </a>
+                                            </div>
+                                            <div class="dropdown-item">
+                                                <a href="#">Block
+                                                    <i class="fa-solid fa-ban"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                                                                                                                                                                  
+                            
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -161,23 +188,28 @@
                                 <div class="content">
                                     <h1>My Pofile</h1>
                                 </div>
-                                <div class="profile-img">
-                                    <img src="img/profile.jpg" width="35" height="35" alt="My profile">
+                                {% if user.backImg == '' %}
+                                    {% set img = "img/back.jpg" %}
+                                {% else %}
+                                    {% set img = user.backImg %}
+                                {% endif %}
+                                <div class="profile-img" style="background-image: url('{{ img }}');">
+                                    <img src="{{ vich_uploader_asset(user, 'imageFile')}}" width="35" height="35" alt="{{user.fname}} {{user.lname}}">
                                 </div>
                             </div>
                             
                             <div class="profile-desc">
-                                <h2>Mamadou Aliou Diallo</h2>
-                                <p>Developpeur Full Stack</p>
+                                <h2>{{user.fname}} {{user.lname}}</h2>
+                                <p>{{user.description}}</p>
                             </div>
                             <div class="profile-details">
                                 <div class="detail-item">
                                     <h3>Phone</h3>
-                                    <p>+221 78 254 12 12</p>
+                                    <p>{{user.phone}}</p>
                                 </div>
                                 <div class="detail-item">
                                     <h3>Email</h3>
-                                    <p>mamadou@aliou.com</p>
+                                    <p>{{user.email}}</p>
                                 </div>
                                 <div class="detail-item">
                                     <h3>Status</h3>
@@ -205,8 +237,8 @@
                             </div>
                         </div>
                         <div class="profile-desc">
-                            <h2>Mamadou Aliou Diallo</h2>
-                            <p>Actif</p>
+                            <h2>{{user.fname}} {{user.lname}}</h2>
+                            <p>Online</p>
                         </div>
                         <div class="parameters">
                             <div class="parameter">
@@ -218,19 +250,19 @@
                                     <form action="#" method="post" id="form-setting">
                                         <div class="form-item">
                                             <label for="fname">Frist Name</label>
-                                            <input type="text" name="fname" id="fname" value="Mamadou aliou">
+                                            <input type="text" name="fname" id="fname" value="{{user.fname}}">
                                         </div>
                                         <div class="form-item">
                                             <label for="lname">Last name</label>
-                                            <input type="text" name="lname" id="lname" value="Diallo">
+                                            <input type="text" name="lname" id="lname" value="{{user.lname}}">
                                         </div>
                                         <div class="form-item">
                                             <label for="email">Email</label>
-                                            <input type="email" name="email" id="email" value="mamadou@aliou.com">
+                                            <input type="email" name="email" id="email" value="{{user.email}}">
                                         </div>
                                         <div class="form-item">
                                             <label for="description">Description</label>
-                                            <input type="text" id="description" name="description" value="My description">
+                                            <input type="text" id="description" name="description" value="{{user.description}}">
                                         </div>
                                         <button type="button"><i class="fa-solid fa-check"></i></button>
                                     </form>
@@ -294,7 +326,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="logout"><a href="#">Log Out</a></p>
+                            <p class="logout"><a href="{{path('app_logout')}}">Log Out</a></p>
                         </div>
                     </div>
                 </div>
@@ -308,7 +340,6 @@
                         <h2>Welcome to Chaap</h2>
                         <p>chat with friends and family safely</p>
                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum, quasi. Lorem ipsum dolor sit.</p>
-                        <button type="button">Get Started</button>
                     </div>
                 </div>
 
@@ -344,17 +375,17 @@
                                     </div>
                                     
                                     <div class="profile-desc">
-                                        <h2>Mamadou Aliou Diallo</h2>
+                                        <h2>{{user.fname}} {{user.lname}}</h2>
                                         <p>Developpeur Full Stack</p>
                                     </div>
                                     <div class="profile-details">
                                         <div class="detail-item">
                                             <h3>Phone</h3>
-                                            <p>+221 78 254 12 12</p>
+                                            <p>{{user.phone}}</p>
                                         </div>
                                         <div class="detail-item">
                                             <h3>Email</h3>
-                                            <p>mamadou@aliou.com</p>
+                                            <p>{{user.email}}</p>
                                         </div>
                                         <div class="detail-item">
                                             <h3>Status</h3>
