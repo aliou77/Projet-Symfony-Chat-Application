@@ -46,7 +46,7 @@
             
     <div class="contact">
         <div class="contact-info">
-            <img src="./img/back.jpg" alt="{{contact.fname}} {{ contact.lname }}">
+            <img src="{{ vich_uploader_asset(contact, 'imageFile') }}" alt="{{contact.fname}} {{ contact.lname }}">
             <p>{{contact.fname }} {{ contact.lname }}</p>
         </div>
         <div class="more">

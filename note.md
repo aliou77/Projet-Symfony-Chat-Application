@@ -6,11 +6,14 @@
 <!-- - creer les entity dans la db avec doctrine -->
 <!-- - ajout d'un utilisateur dans la db et le configurer dans symfony (pour l'inscription) -->
 # -------------------------- A FAIRE ------------------------------ #
-- commiter le feat/contact
-- configuer l'autentification 
-- configurer la connexion
-- mettre en place la deconnexion
-- effectuer l'ajax sur les links restants (profile, messages, settings)
+<!-- - commiter le feat/contact -->
+<!-- - configuer l'autentification  -->
+<!-- - configurer la connexion -->
+<!-- - mettre en place la deconnexion -->
+- setup contact
+- setup profile
+- setup setting
+- setup message
 # --------------------------------------------------------------------------- #
 - configuration de la homepage
 - creation des routes de la homepage
@@ -41,7 +44,6 @@
 -------- A FAIRE INSHALLAH -----------
 
 
-- ajouter dans un champs de modification de la description du user dans setting
 - effectuer le triage alphabetique sur les contacts
 
 
@@ -68,3 +70,18 @@ et recepient_id sera ajouter manuellement
 # NB: dans les tables generer par doctrine:
 - dans les tables de liaison manyTOmany (deleted et blocked), celui qui delete ou block est le 2em champs (users_id)
 - donc lors d'ajout dans les tables originelles (deleted et blocked) on ajoute que le user qui a ete blocked ou deleted -->
+-----------------------------------------
+# systeme d'auth pour tous les users:
+- faire un make:auth, prendre option 1
+creation d'un nouveau userAuthenicator
+- mettre la route a rediriger apres connexion dans UsersAuthenticator::onAuthenticationSuccess
+- dans security.yaml ne pas decommenter les routes dans <access_control:>
+- ajouter le role des users dans Users::getRoles
+- ajouter la route a aller apres deconnexion dans security.yaml <logout:>
+- et enfin ajouter une condition dans le controller Home
+si aucun user n'est connecter on le renvoie vers la page login avec ($this->getUser())
+-------------
+- essayer d'utiliser le entry_point pour rediriger les users qui ne sont pas conneceter
+# NB: pour le corriger le probleme peut etre qu'il faut que la route commence par qlq chose comme le ^/admin
+-- la logique etait exacte fallait modifier l'url a utiliser pour home '/' en '^/home'
+# NB: le entry_point est point d'entrer, lorsqu'une route est configurer dans <access_control:> comme ici ^/home
