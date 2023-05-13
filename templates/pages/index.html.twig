@@ -5,12 +5,14 @@
 {% block body %}
 
     <main id="root">
+        <div id="success">
+        </div>
         <header>
             <nav class="nav-content">
                 <div class="slide-menu">
                     <nav-tabs id="tab">
                         <a href="#profile" class="user-profile-img">
-                            <img id="nav-profile-img" src="./img/profile.jpg" alt="profile image">
+                            <img id="nav-profile-img" src="{{ vich_uploader_asset(user, 'imageFile')}}" alt="profile image">
                         </a>
                         <div class="show-hide-arrow">
                             <i class="fa-solid fa-arrow-left"></i>
@@ -191,10 +193,10 @@
                                 {% if user.backImg == '' %}
                                     {% set img = "img/back.jpg" %}
                                 {% else %}
-                                    {% set img = user.backImg %}
+                                    {% set img = vich_uploader_asset(user, 'imageFile') %}
                                 {% endif %}
                                 <div class="profile-img" style="background-image: url('{{ img }}');">
-                                    <img src="{{ vich_uploader_asset(user, 'imageFile')}}" width="35" height="35" alt="{{user.fname}} {{user.lname}}">
+                                    <img src="{{ vich_uploader_asset(user, 'imageFile')}} " width="35" height="35" alt="{{user.fname}} {{user.lname}}">
                                 </div>
                             </div>
                             
@@ -228,12 +230,8 @@
                                 </div>
                             </div>
                             <div class="profile-img">
-                                <img src="img/profile.jpg" width="35" height="35" alt="My profile">
-                                <div class="camera">
-                                    <div class="icon">
-                                        <i class="fa-solid fa-camera"></i>
-                                    </div>
-                                </div>
+                                <img src="/images/profile_imgs/{{ user.profileImg }}" width="35" height="35" alt="{{user.fname}} {{user.lname}}">
+                                
                             </div>
                         </div>
                         <div class="profile-desc">
@@ -247,7 +245,7 @@
                                     <button id="accordion">Personal info</button>
                                 </div>
                                 <div class="panel">
-                                    <form action="#" method="post" id="form-setting">
+                                    <form action="{{ path('users.edit', {id: user.id}) }}" method="post" id="form-setting">
                                         <div class="form-item">
                                             <label for="fname">Frist Name</label>
                                             <input type="text" name="fname" id="fname" value="{{user.fname}}">
@@ -264,7 +262,7 @@
                                             <label for="description">Description</label>
                                             <input type="text" id="description" name="description" value="{{user.description}}">
                                         </div>
-                                        <button type="button"><i class="fa-solid fa-check"></i></button>
+                                        <button type="submit"><i class="fa-solid fa-check"></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -326,7 +324,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="logout"><a href="{{path('app_logout')}}">Log Out</a></p>
+                            <p class="logout"><a href="{{ path('app_logout') }}">Log Out</a></p>
                         </div>
                     </div>
                 </div>

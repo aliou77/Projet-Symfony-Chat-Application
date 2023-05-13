@@ -12,6 +12,7 @@ import './fontawesome/css/all.css';
 // js import
 import './scripts/script';
 import './fontawesome/js/all';
+import './scripts/ajax/ajax';
 // import SlideBarDatas from './scripts/ajax/SlideBarDatas'
 
 

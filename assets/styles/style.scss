@@ -92,7 +92,7 @@ main{
         
         img{
             width: 50px;
-            height: auto;
+            height: 50px;
             border-radius: 50%;
         }
     }
@@ -114,6 +114,38 @@ main{
 @keyframes fadeEffect {
 from {opacity: 0;}
 to {opacity: 1;}
+}
+
+// ----------------------------- //
+//          CSS flash messages     
+// ----------------------------- //
+
+#success{
+    position: absolute;
+    top: 0;
+    z-index: 99;
+    width: 100%;
+    display: none;
+    p{
+        color: white;
+        background-color: #0b530be1;
+        font-size: 20px;
+        text-align: center;
+        padding: 10px 0;
+    }
+}
+#failed{
+    position: absolute;
+    top: 0;
+    z-index: 99;
+    width: 100%;
+    p{
+        color: white;
+        background-color: #bb1e1ee1;
+        font-size: 20px;
+        text-align: center;
+        padding: 10px 0;
+    }
 }
 
 // ----------------------------- //
@@ -499,24 +531,33 @@ header .nav-content{
         overflow: hidden;
         img{
             width: 5.2rem;
-            height: auto;
+            height: 5rem;
         }
     }
-    .camera{
-        position: relative;
-        .icon{
-            position: absolute;
-            top: -2rem;
-            left: 47%;
-            padding: 8px;
-            background: gray;
-            border-radius: 50%;
-            cursor: pointer;
-            &:hover{
-                background-color: black;
-            }
-        }
-    }
+    // .camera{
+    //     position: relative;
+    //     .icon{
+    //         position: absolute;
+    //         top: -2rem;
+    //         left: 53%;
+    //         padding: 5px;
+    //         background: gray;
+    //         border-radius: 50%;
+    //         cursor: pointer;
+    //         a{
+    //             color: white;
+    //         }
+    //         &:hover{
+    //             background-color: black;
+    //         }
+    //         input{
+    //             display: none;
+    //         }
+    //         label:hover{
+    //             cursor: pointer;
+    //         }
+    //     }
+    // }
     .profile-desc{
         margin-top: 3.5rem;
         padding-bottom: 2rem;

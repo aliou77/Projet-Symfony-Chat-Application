@@ -10,10 +10,15 @@
 <!-- - configuer l'autentification  -->
 <!-- - configurer la connexion -->
 <!-- - mettre en place la deconnexion -->
-- setup contact
-- setup profile
-- setup setting
+<!-- - setup profile -->
+- setup contact search
 - setup message
+- setup setting
+    photo profile et le background-img
+    pour la modification des image, il faut renvoyer le user dans une page ou il soumet un form content les images qui seront updater en php, pour utiliser l'axaj il faut nodejs.
+    il sera renvoyer a la page lors du click sur le svg <pen>, un popup s'ouvre avec un form pour changer les images profile et back
+    apres submition. utiliser <vichUploader>
+
 # --------------------------------------------------------------------------- #
 - configuration de la homepage
 - creation des routes de la homepage
