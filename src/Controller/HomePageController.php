@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Users;
+use App\Form\UsersType;
 use App\Repository\UsersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,6 +16,7 @@ class HomePageController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(Request $request, UsersRepository $repo): Response
     {
+
         if($this->getUser() == null){
             // si aucun utilisateur est connecter on le renvoie vers la page de login
             return $this->redirectToRoute("login");

@@ -179,7 +179,6 @@ $(document).ready(function(){
          * create a dropdown
          */
         createDropdown(btns){
-            console.log(btns)
             $(btns).each(function(i, btn){
                 $(btn).on("click", (e)=>{
                     $(btn).next("#dropdown").toggleClass("active")
@@ -278,7 +277,24 @@ $(document).ready(function(){
         /**
          * 
          */
-        comfirmPassword(){
+        profileImageChange(img, inputFile){
+        }
+
+        async fetchImage(url, inputFile){
+            const form = new FormData()
+            form.append("file", $(inputFile).prop('files')[0].name)
+            console.log(form)
+            const res = await fetch(url, {
+                headers: {
+                    'X-Requested-Width': 'XMLHttpRequest'
+                },
+                method: "POST",
+                body: form
+            })
+            if(res.ok){
+                const data = await res.json()
+                console.log(data)
+            }
         }
 
     }
