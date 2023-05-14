@@ -406,7 +406,7 @@ header .nav-content{
     .contacts-content{
         @include config-height();
         @include config-scrolbar();
-        margin-top: 30px;
+        // margin-top: 30px;
         max-height: 397px;
         height: 415px;
     }
@@ -773,6 +773,7 @@ header .nav-content{
         justify-content: center;
         align-items: center;
         text-align: center;
+        animation: fadeEffect .5s;
         .content{
             max-width: 24rem;
         }
@@ -809,6 +810,7 @@ header .nav-content{
 
 .chat-section{
     display: none;
+    animation: fadeEffect .5s;
     // header
     .header{
         background-color: black;
@@ -816,7 +818,7 @@ header .nav-content{
         justify-content: space-between;
         align-items: center;
         padding: 10px;
-        box-shadow: 11px 1px 14px 8px gray;
+        box-shadow: 11px 1px 14px -2px gray;
         margin: 0;
         border-bottom: 0;
         .user-status{
@@ -941,6 +943,7 @@ header .nav-content{
         display: flex;
         align-items: center;
         height: 4rem;
+        box-shadow: 11px 1px 14px -2px gray;
         svg{
             margin-left: 18px;
             font-size: 22px;
@@ -1019,8 +1022,19 @@ header .nav-content{
             font-weight: bold;
         }
     }
+    .profile-img{
+        position: absolute;
+        top: 71%;
+        left: 36%;
+        border-radius: 50%;
+        overflow: hidden;
+        img{
+            width: 5.2rem;
+            height: 5rem;
+        }
+    }
     .profile-desc{
-        margin-top: 1.5rem;
+        margin-top: 3.5rem;
         padding-bottom: 2rem;
         text-align: center;
         border-bottom: 0.1px solid $border-bottom-color; 

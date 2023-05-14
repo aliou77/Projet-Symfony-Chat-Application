@@ -227,18 +227,7 @@ $(document).ready(function(){
             })
         }
 
-        /**
-         * 
-         */
-        createModal(icon, close){
-            $(icon).on("click", function(){
-                $("#modal-user").addClass("active")
-            })
-
-            $(close).on("click", function(){
-                $("#modal-user").removeClass("active")
-            })
-        }
+        
 
         /**
          * discard effect when click on window
@@ -306,7 +295,6 @@ $(document).ready(function(){
         w.hideAndShowSlideMenu($("#tab .show-hide-arrow"), $("main .chat-slide-menu"))
         w.lightDarkWwitchTheme($("#setting .parameter .dark"), $("#setting .parameter .light"))
         w.hideSowPassword($("#eye"))
-        w.createModal($(".chat-section .icons .more"), $(".chat-section #close-profile"))
         w.discardEvents()
         w.enableErrorColor($("#form-signup input"))
         w.createDropdown($(".contacts-content .btn-dropdown"))

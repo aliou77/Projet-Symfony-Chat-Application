@@ -11,8 +11,13 @@
 <!-- - configurer la connexion -->
 <!-- - mettre en place la deconnexion -->
 <!-- - setup profile -->
-- setup contact search
+<!-- - setup contact search -->
 - setup message
+ + apres le click sur un contact ou message on recuper le user selectionner on affiche ses infos dans la chat section et dans le modal
+ + on envyoie les messages, on les stock en DB
+ + on les reaffiche pour chaque user selectionnet, et on renvoie une vue en json content toutes la section message les infos du user et les messages lui concernant.
+- setup audio send
+
 - setup setting
     photo profile et le background-img
     pour la modification des image, il faut renvoyer le user dans une page ou il soumet un form content les images qui seront updater en php, pour utiliser l'axaj il faut nodejs.
@@ -38,6 +43,7 @@
 - stocker les messaes envoyer par les users dans la tables messages
 - puis afficher les message text envoyer par chaque user dans le chat
 - mettre en place les messages audio
+- ajout remember me dans la connexion
 # NB: utiliser wavesurfer pour la lecture des audios link: https://wavesurfer-js.org/api/index.html
 - l'envoie d'image
 - ajouter la fonctinnalite de suppression des messages

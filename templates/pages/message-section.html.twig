@@ -1,0 +1,129 @@
+<div class="chat-section">
+    <div class="header">
+        <div class="user-status">
+            <div class="user-status-img">
+                <img src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="{{user.fname}} {{user.lname}}">
+            </div>
+            <div class="user-details">
+                <h3>{{user.fname}} {{user.lname}}</h3>
+                <p>Online</p>
+            </div>
+        </div>
+        <div class="icons">
+            <!-- <div class="video">
+                <i class="fa-solid fa-video"></i>
+            </div> -->
+            <!-- <div class="phone">
+                <i class="fa-solid fa-phone"></i>
+            </div> -->
+            <div class="more">
+                <i class="fa-solid fa-circle-info" id="open-profile"></i>
+            </div>
+            <div id="modal-user">
+                <div class="profile-back">
+                    {% if user.backImg == '' %}
+                        {% set img = "img/back.jpg" %}
+                    {% else %}
+                        {% set img = vich_uploader_asset(user, 'imageFile') %}
+                    {% endif %}
+                    <div class="content-back" style="background-image: url('{{ img }}');">
+                        <div class="content">
+                            <div id="close-profile">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                        </div>
+                        <div class="profile-img">
+                            <img src="{{ vich_uploader_asset(user, 'imageFile')}} " width="35" height="35" alt="{{user.fname}} {{user.lname}}">
+                        </div>
+                    </div>
+                    
+                    <div class="profile-desc">
+                        <h2>{{user.fname}} {{user.lname}}</h2>
+                        <p>{{user.description}}</p>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <h3>Phone</h3>
+                            <p>{{user.phone}}</p>
+                        </div>
+                        <div class="detail-item">
+                            <h3>Email</h3>
+                            <p>{{user.email}}</p>
+                        </div>
+                        <div class="detail-item">
+                            <h3>Status</h3>
+                            {% if user.status == true %}
+                                <p>Online</p>
+                            {% else %}
+                                <p>Offline</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body">
+        <div class="receive">
+            <div class="receive-img">
+                <img src="./img/back.jpg" alt="">
+            </div>
+            <p>comment allez-vous ? <span id="hour">12:23</span></p>
+        </div>
+        <div class="send">
+            <p>Bonjour </p>
+        </div>
+        <div class="receive">
+            <div class="receive-img">
+                <img src="./img/back.jpg" alt="">
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, eum architecto. Unde eligendi esse, quos et corrupti at, ipsum, quaerat illum voluptates similique eum odit cupiditate debitis deleniti natus accusamus.</p>
+        </div>
+        <div class="send">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio o <span id="hour">16:23</span></p>
+        </div>
+        <div class="receive">
+            <div class="receive-img">
+                <img src="./img/back.jpg" alt="">
+            </div>
+            <p>comment allez-vous ? </p>
+        </div>
+        <div class="send">
+            <p>Bonjour </p>
+        </div>
+        <div class="receive">
+            <div class="receive-img">
+                <img src="./img/back.jpg" alt="">
+            </div>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate recusandae architecto accusamus cumque vero explicabo odio necessitatibus fugit placeat accusantium pariatur aperiam libero commodi et cum eligendi fuga, deserunt esse. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi tenetur accusamus ab unde voluptatem blanditiis error. Voluptatum nulla, eveniet error aut in minima esse quaerat neque sit atque adipisci debitis. </p>
+        </div>
+        <div class="send">
+            <p>Bonjour </p>
+        </div>
+        <div class="send">
+            <img class="img-chat" src="./img/back.jpg" alt="">
+        </div>
+        <div class="receive">
+            <div class="receive-img">
+                <img src="./img/back.jpg" alt="">
+            </div>
+            <img class="img-chat" src="./img/back.jpg" alt="">
+        </div>
+    </div>
+    <div class="footer">
+        <div class="emoji">
+            <i class="fa-regular fa-face-smile-beam"></i>
+        </div>
+        <div class="link">
+            <i class="fa-solid fa-paperclip"></i>
+        </div>
+        <div class="form-chat" id="form-chat">
+            <form action="#" method="post" id="form-chat">
+                <input type="text" placeholder="Tape a message...">
+            </form>
+        </div>
+        <div class="microphone">
+            <i class="fa-solid fa-microphone"></i>
+        </div>
+    </div>
+</div>
