@@ -147,8 +147,8 @@
                     <div id="contact" class="tabcontent"  hidden="hidden">
                         <h3>Contact</h3>
                         <div class="search-bar">
-                            <form action="" method="post" id="form-search" class="contact">
-                                <input type="search" placeholder="Search or start new discussion...">
+                            <form action="{{path('form.contact')}}" method="GET" id="form-search" class="contact">
+                                <input type="search" name="search" placeholder="Search or start new discussion...">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </form>
                         </div>
@@ -195,7 +195,7 @@
                                 {% else %}
                                     {% set img = vich_uploader_asset(user, 'imageFile') %}
                                 {% endif %}
-                                <div class="profile-img" style="background-image: url('{{ img }}');">
+                                <div class="profile-img">
                                     <img src="{{ vich_uploader_asset(user, 'imageFile')}} " width="35" height="35" alt="{{user.fname}} {{user.lname}}">
                                 </div>
                             </div>
@@ -230,8 +230,7 @@
                                 </div>
                             </div>
                             <div class="profile-img">
-                                <img src="/images/profile_imgs/{{ user.profileImg }}" width="35" height="35" alt="{{user.fname}} {{user.lname}}">
-                                
+                                <img src="{{ vich_uploader_asset(user, 'imageFile') }}" width="35" height="35" alt="{{user.fname}} {{user.lname}}">
                             </div>
                         </div>
                         <div class="profile-desc">

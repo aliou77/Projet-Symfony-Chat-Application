@@ -51,6 +51,18 @@ class UsersRepository extends ServiceEntityRepository
        ;
    }
 
+   /**
+    * @return Users[] contenant le resultat de la recherche
+    */
+   public function findBySearchTerm(string $search){
+        return $this->createQueryBuilder('u')
+            ->Where('u.fname LIKE :search OR u.lname LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+            ->getQuery()
+            ->getResult()
+        ;
+   }
+
 //    public function findOneBySomeField($value): ?Users
 //    {
 //        return $this->createQueryBuilder('u')

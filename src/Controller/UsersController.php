@@ -43,7 +43,7 @@ class UsersController extends AbstractController
         }
     }
 
-    #[Route('/change-profle-img-{id}', name: 'profile-img-change', methods: ['POST'])]
+    #[Route('/change-profle-imgs-{id}', name: 'profile-img-change', methods: ['POST'])]
     public function index(Request $request, Users $user): Response
     {
         
