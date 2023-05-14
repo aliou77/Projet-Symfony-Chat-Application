@@ -373,6 +373,7 @@ header .nav-content{
         align-items: center;
         justify-content: space-between;
         margin-bottom: 10px;
+        border: none;
         input{
             outline: none;
             width: 91%;
@@ -399,13 +400,15 @@ header .nav-content{
             color: white;
             font-size: 20px;
             cursor: pointer;
+            margin: 0;
         }
     }
     .contacts-content{
         @include config-height();
         @include config-scrolbar();
         margin-top: 30px;
-
+        max-height: 397px;
+        height: 415px;
     }
     .sort-letter{
         display: flex;

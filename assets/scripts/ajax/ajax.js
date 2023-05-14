@@ -30,10 +30,36 @@ $(document).ready(()=>{
         element.fadeIn().fadeOut(5000)
     }
 
-    function setField(form, data){
-        $(form).children("#fname").val(data.fname)
-        $(form).children("#lname").val(data.lname)
-        $(form).children("#email").val(data.email)
-        $(form).children("#description").val(data.description)
-    }
+    // search form contact focus
+    $("form.contact").children('svg').click(function(e){
+        $("form.contact").children("input").focus()
+    })
+
+    // search form contact 
+    $("form.contact").submit((e)=>{
+        e.preventDefault()
+    })
+    $("form.contact").on("keyup", function(){
+        const url = $(this).attr("action")
+        const data = $(this).children('input').val()
+        const content = $("#contact .contacts-content")
+        // console.log(content)
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: {
+                searchTerm: data
+            },
+            dataType: "json",
+            success: function (res) {
+                // console.log(res)
+                if(res.status == "success"){
+                    $(content).html(res.content)
+                }else if(res.status == "not-found"){
+                    $(content).html("<p style='text-align: center;'>User Not Found !</p>")
+                }
+            }
+        });
+    })
+    // console.log()
 })
