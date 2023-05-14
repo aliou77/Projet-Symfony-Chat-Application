@@ -58,6 +58,20 @@ class UsersController extends AbstractController
 
     }
 
+    #[Route('/message-section-{id}', 'message.section')]
+    public function message(Request $request, Users $user){
+        // on recupere le user sur sur le quel on a clicker ($user)
+        if($request->isXmlHttpRequest()){
+            return new JsonResponse([
+                'content' => $this->renderView('pages/message-section.html.twig', [
+                    'user' => $user,
+                    'messages' => '',
+                ]),
+                'status' => 'success'
+            ]);
+        }
+    }
+
 
     #[Route('/{id}', name: 'app_users_delete', methods: ['POST'])]
     public function delete(Request $request, Users $user, UsersRepository $usersRepository): Response

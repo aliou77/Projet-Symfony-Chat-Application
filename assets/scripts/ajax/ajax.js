@@ -29,6 +29,7 @@ $(document).ready(()=>{
         element.html("<p>"+data.message+"</p>")
         element.fadeIn().fadeOut(5000)
     }
+// ------------------------------------------------------------
 
     // search form contact focus
     $("form.contact").children('svg').click(function(e){
@@ -61,5 +62,43 @@ $(document).ready(()=>{
             }
         });
     })
-    // console.log()
+// ------------------------------------------------------------
+
+    // message section ajax 
+    const chat_section = $("div.chat-section")
+    const get_started = $("div.get-started")
+    const user_chat = $("section.user-chat")
+    // console.log("avant click: "+chat_section)
+    $("#contact div.contact a").each(function(i, item){
+        $(item).on("click", function(e){
+            e.preventDefault()
+            const url = $(this).attr('href')
+            get_started.css('display', 'none')
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: "",
+                dataType: "JSON",
+                success: function (res) {
+                    if(res.status == 'success'){
+                        user_chat.html(res.content)
+                        $("div.chat-section").css('display', 'block')
+                        showModal($(".chat-section .icons .more"), $(".chat-section #close-profile"))
+                    }
+                }
+            });
+        })
+
+    }) 
+
+    function showModal(icon, close){
+       $(icon).on("click", function(){
+           $("#modal-user").addClass("active")
+       })
+
+       $(close).on("click", function(){
+           $("#modal-user").removeClass("active")
+       })
+   }
+        
 })
