@@ -20,8 +20,9 @@ class FormsController extends AbstractController{
 
         
         if($request->isXmlHttpRequest()){
-            
-            $contacts = $repo->findBySearchTerm($request->get('searchTerm'));
+            /** @var Users */
+            $user = $this->getUser();
+            $contacts = $repo->findBySearchTerm($request->get('searchTerm'), $user->getId());
             if(!empty($contacts)){
                 return new JsonResponse([
                     'content' => $this->renderView('forms/form-contact.html.twig', [

@@ -767,6 +767,9 @@ header .nav-content{
     background-size: cover;
     padding: 0;
     border-radius: 0;
+    &.active{
+        background-color: black;
+    }
     .get-started{
         height: 100vh;
         display: flex;
@@ -1251,7 +1254,7 @@ header .nav-content{
 footer{
     height: 20px;
     padding: 20px 0 27px;
-    background-color: black;
+    background-color: $dark-light-color;
     text-align: center;
     color: white;
     font-size: 19px;
@@ -1260,6 +1263,12 @@ footer{
         color: black;
     }
 }
+
+// effet de chargement 
+div#loader {
+   @include loading-effect();
+}
+  
 
 
 /* media queries */
