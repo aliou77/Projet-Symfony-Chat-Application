@@ -13,11 +13,14 @@
 <!-- - setup profile -->
 <!-- - setup contact search -->
 - setup message
- + apres le click sur un contact ou message on recuper le user selectionner on affiche ses infos dans la chat section et dans le modal
- + on envyoie les messages, on les stock en DB
+ <!-- + apres le click sur un contact ou message on recuper le user selectionner on affiche ses infos dans la chat section et dans le modal -->
+ <!-- + on envyoie les messages, on les stock en DB -->
  + on les reaffiche pour chaque user selectionnet, et on renvoie une vue en json content toutes la section message les infos du user et les messages lui concernant.
+- mettre l'effet de chargement de page dans les requettes ajax 
+- fix les conctacts dont l'ajax ne s'applique pas apres une recherche
+- organiser l'affichage des error d'invalidation dans page connexion
 - setup audio send
-
+- creer un service pour rediger les slug que les users pourais modifier
 - setup setting
     photo profile et le background-img
     pour la modification des image, il faut renvoyer le user dans une page ou il soumet un form content les images qui seront updater en php, pour utiliser l'axaj il faut nodejs.
@@ -50,7 +53,7 @@
 # NB: creer un controller pour la homepage et effectuer des requettes an AXAJ pour la recuperation des donnees
 ----- a la fin du projet -----------
 - watch grafikart video to understand serialisation and connexion fonctionnalities
-
+- commprendre les requttes sql avec les join
 
 -------- A FAIRE INSHALLAH -----------
 

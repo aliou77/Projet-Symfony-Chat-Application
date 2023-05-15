@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Users;
 use App\Form\UsersType;
+use App\Repository\MessagesRepository;
 use App\Repository\UsersRepository;
 use App\Service\ServiceUsers;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -59,13 +60,28 @@ class UsersController extends AbstractController
     }
 
     #[Route('/message-section-{id}', 'message.section')]
-    public function message(Request $request, Users $user){
+    public function message(Request $request, Users $user, $id, MessagesRepository $msgRepo){
         // on recupere le user sur sur le quel on a clicker ($user)
+        /** @var Users */
+        $user_sending = $this->getUser();
+        $messages = $msgRepo->findMessages($user_sending->getId(), $id);
+        return new JsonResponse([
+            'content' => $this->renderView('pages/message-section.html.twig', [
+                'user' => $user,
+                'messages' => $messages,
+            ]),
+            'status' => 'success'
+        ]);
         if($request->isXmlHttpRequest()){
+            /** @var Users */
+            $user_sending = $this->getUser();
+            $sender_id = $user_sending->getId();
+            $messages = $msgRepo->findMessages($sender_id, $id);
             return new JsonResponse([
                 'content' => $this->renderView('pages/message-section.html.twig', [
                     'user' => $user,
-                    'messages' => '',
+                    'messages' => $messages,
+                    'sender_id' => (int)$sender_id,
                 ]),
                 'status' => 'success'
             ]);

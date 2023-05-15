@@ -39,6 +39,20 @@ class MessagesRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Users[] contenant les messages de discussion avec l'interloculeur
+     */
+    public function findMessages($sender_id, $recepient_id){
+        return $this->createQueryBuilder('m')
+                // NB: le sender peut aussi etre le recepient ou le recepient etre le sender
+                ->andWhere('m.sender_id = :s_id AND m.recepient_id = :r_id OR m.sender_id = :r_id AND m.recepient_id = :s_id')
+                ->setParameter('s_id', $sender_id)
+                ->setParameter('r_id', $recepient_id)
+                ->orderBy('m.id', 'ASC')
+                ->getQuery()
+                ->getResult()    
+        ;
+    }
 //    /**
 //     * @return Messages[] Returns an array of Messages objects
 //     */

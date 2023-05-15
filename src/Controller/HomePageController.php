@@ -21,8 +21,9 @@ class HomePageController extends AbstractController
             // si aucun utilisateur est connecter on le renvoie vers la page de login
             return $this->redirectToRoute("login");
         }
-
-        $contacts = $repo->findUsersByOrder();
+        /** @var Users */
+        $user = $this->getUser();
+        $contacts = $repo->findUsersByOrder($user->getId());
 
         return $this->render('pages/index.html.twig', [
             'controller_name' => 'HomePageController',

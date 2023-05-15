@@ -64,43 +64,26 @@
         </div>
     </div>
     <div class="body">
-        <div class="receive">
-            <div class="receive-img">
-                <img src="./img/back.jpg" alt="">
-            </div>
-            <p>comment allez-vous ? <span id="hour">12:23</span></p>
-        </div>
-        <div class="send">
-            <p>Bonjour </p>
-        </div>
-        <div class="receive">
-            <div class="receive-img">
-                <img src="./img/back.jpg" alt="">
-            </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, eum architecto. Unde eligendi esse, quos et corrupti at, ipsum, quaerat illum voluptates similique eum odit cupiditate debitis deleniti natus accusamus.</p>
-        </div>
-        <div class="send">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio o <span id="hour">16:23</span></p>
-        </div>
-        <div class="receive">
-            <div class="receive-img">
-                <img src="./img/back.jpg" alt="">
-            </div>
-            <p>comment allez-vous ? </p>
-        </div>
-        <div class="send">
-            <p>Bonjour </p>
-        </div>
-        <div class="receive">
-            <div class="receive-img">
-                <img src="./img/back.jpg" alt="">
-            </div>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate recusandae architecto accusamus cumque vero explicabo odio necessitatibus fugit placeat accusantium pariatur aperiam libero commodi et cum eligendi fuga, deserunt esse. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi tenetur accusamus ab unde voluptatem blanditiis error. Voluptatum nulla, eveniet error aut in minima esse quaerat neque sit atque adipisci debitis. </p>
-        </div>
-        <div class="send">
-            <p>Bonjour </p>
-        </div>
-        <div class="send">
+
+        {% for m in messages %}
+
+            {% if m.recepientId == user.id %}
+                <div class="send">
+                    <p>{{ m.message|nl2br }} <span id="hour">{{ m.createdAt|date('H:i') }}</span></p>
+                </div>
+                
+            {% else %}
+                <div class="receive">
+                    <div class="receive-img">
+                        <img src="{{ vich_uploader_asset(user, 'imageFile' )}}" alt="{{user.fname}} {{user.lname}}">
+                    </div>
+                    <p>{{ m.message|nl2br }} <span id="hour">{{ m.createdAt|date('H:i') }}</span></p>
+                </div>
+            {% endif %}
+        {% endfor %}
+        
+
+        {# <div class="send">
             <img class="img-chat" src="./img/back.jpg" alt="">
         </div>
         <div class="receive">
@@ -108,7 +91,7 @@
                 <img src="./img/back.jpg" alt="">
             </div>
             <img class="img-chat" src="./img/back.jpg" alt="">
-        </div>
+        </div> #}
     </div>
     <div class="footer">
         <div class="emoji">
@@ -118,8 +101,9 @@
             <i class="fa-solid fa-paperclip"></i>
         </div>
         <div class="form-chat" id="form-chat">
-            <form action="#" method="post" id="form-chat">
-                <input type="text" placeholder="Tape a message...">
+            <form action="{{ path('form.message') }}" method="post" id="form-chat" autocomplete="off">
+                <input type="text" name="message" placeholder="Tape a message...">
+                <input type="hidden" value="{{ user.id }}" id="user_receiving" name="user_receiving">
             </form>
         </div>
         <div class="microphone">
