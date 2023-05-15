@@ -104,3 +104,19 @@ $dark-light-color: rgba(0, 0, 0, 0.883);
         margin-bottom: 1px;
         background-color: rgb(45, 194, 65);}
 }
+
+@mixin loading-effect($border: 8px, $taile: 70px){
+    &{
+        border: $border solid gray;
+        border-top: $border solid white;
+        border-radius: 50%;
+        width: $taile;
+        height: $taile;
+        animation: spin 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite; // linear
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

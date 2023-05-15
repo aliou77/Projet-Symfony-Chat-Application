@@ -15,8 +15,9 @@
 - setup message
  <!-- + apres le click sur un contact ou message on recuper le user selectionner on affiche ses infos dans la chat section et dans le modal -->
  <!-- + on envyoie les messages, on les stock en DB -->
- + on les reaffiche pour chaque user selectionnet, et on renvoie une vue en json content toutes la section message les infos du user et les messages lui concernant.
+ <!-- + on les reaffiche pour chaque user selectionnet, et on renvoie une vue en json content toutes la section message les infos du user et les messages lui concernant. -->
 - mettre l'effet de chargement de page dans les requettes ajax 
+
 - fix les conctacts dont l'ajax ne s'applique pas apres une recherche
 - organiser l'affichage des error d'invalidation dans page connexion
 - setup audio send
@@ -47,6 +48,7 @@
 - puis afficher les message text envoyer par chaque user dans le chat
 - mettre en place les messages audio
 - ajout remember me dans la connexion
+- ajouter un effet de chargement de la homepage avec le document.readyState
 # NB: utiliser wavesurfer pour la lecture des audios link: https://wavesurfer-js.org/api/index.html
 - l'envoie d'image
 - ajouter la fonctinnalite de suppression des messages

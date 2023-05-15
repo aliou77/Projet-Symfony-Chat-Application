@@ -1,4 +1,11 @@
 // all ajax requests
+// setInterval(() => {
+//     console.log(document.readyState)
+// }, 100);
+// if(document.readyState == 'interactive'){
+//     console.log("internactive")
+// }
+
 
 // $("#success").fadeOut(3000)
 $(document).ready(()=>{
@@ -67,12 +74,16 @@ $(document).ready(()=>{
     // message section ajax 
     const get_started = $("div.get-started")
     const user_chat = $("section.user-chat")
+
     // console.log("avant click: "+chat_section)
     $("#contact div.contact a").each(function(i, item){
         $(item).on("click", function(e){
             e.preventDefault()
             const url = $(this).attr('href')
             get_started.css('display', 'none')
+            // effet de chargement
+            user_chat.html('<div style="display: flex; justify-content: center;"><div id="loader"></div></div>')
+            user_chat.addClass('active')
             $.ajax({
                 type: "POST",
                 url: url,
@@ -80,6 +91,7 @@ $(document).ready(()=>{
                 dataType: "JSON",
                 success: function (res) {
                     if(res.status == 'success'){
+                        user_chat.removeClass('active')
                         user_chat.html(res.content)
                         $("div.chat-section").css('display', 'block')
                         // renvoie le user au bottom de la discussion
@@ -132,6 +144,7 @@ $(document).ready(()=>{
         // console.log($("form#form-chat"))
    }
 
+   console.log(document.readyState)
    
         
 })
