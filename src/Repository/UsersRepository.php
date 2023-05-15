@@ -42,9 +42,11 @@ class UsersRepository extends ServiceEntityRepository
    /**
     * @return Users[] Returns an array of Users objects
     */
-   public function findUsersByOrder(): array
+   public function findUsersByOrder(int $id): array
    {
        return $this->createQueryBuilder('u')
+           ->andWhere("u.id != :id")
+           ->setParameter('id', $id)
            ->orderBy('u.fname', 'ASC')
            ->getQuery()
            ->getResult()

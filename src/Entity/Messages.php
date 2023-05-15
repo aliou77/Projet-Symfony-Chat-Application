@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\MessagesRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MessagesRepository::class)]
@@ -22,6 +23,9 @@ class Messages
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $message = null;
 
     public function getId(): ?int
     {
@@ -60,6 +64,18 @@ class Messages
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(string $message): self
+    {
+        $this->message = $message;
 
         return $this;
     }

@@ -65,7 +65,6 @@ $(document).ready(()=>{
 // ------------------------------------------------------------
 
     // message section ajax 
-    const chat_section = $("div.chat-section")
     const get_started = $("div.get-started")
     const user_chat = $("section.user-chat")
     // console.log("avant click: "+chat_section)
@@ -83,7 +82,14 @@ $(document).ready(()=>{
                     if(res.status == 'success'){
                         user_chat.html(res.content)
                         $("div.chat-section").css('display', 'block')
+                        // renvoie le user au bottom de la discussion
+                        const body = document.querySelector("div.body")
+                        body.scrollTop = body.scrollHeight
+                        // active la feat du modal
                         showModal($(".chat-section .icons .more"), $(".chat-section #close-profile"))
+                        // envoie le form du chat en ajax
+                        sendChatForm()
+
                     }
                 }
             });
@@ -100,5 +106,32 @@ $(document).ready(()=>{
            $("#modal-user").removeClass("active")
        })
    }
+
+   // send messages on the chat section
+   function sendChatForm(){
+
+        $("form#form-chat").on("submit", function(e){
+            e.preventDefault()
+            const datas = $(this).serializeArray()
+            $('form#form-chat input[type="text"]').val('')
+            $.ajax({
+                type: "POST",
+                url: $(this).attr('action'),
+                data: datas,
+                dataType: "JSON",
+                success: function (res) {
+                    // console.log(res)
+                    if(res.status == "success"){
+                        // console.log(res)
+                    }
+                }
+            });
+
+        })
+
+        // console.log($("form#form-chat"))
+   }
+
+   
         
 })

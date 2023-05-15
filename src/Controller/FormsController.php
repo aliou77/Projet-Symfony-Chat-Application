@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Users;
+use App\Repository\MessagesRepository;
 use App\Repository\UsersRepository;
+use App\Service\ServiceForms;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +16,7 @@ class FormsController extends AbstractController{
 
 
     #[Route('/form-contact', 'form.contact')]
-    public function formContact(Request $request, UsersRepository $repo){
+    public function formContact(Request $request, UsersRepository $repo): Response {
 
         
         if($request->isXmlHttpRequest()){
@@ -32,6 +35,26 @@ class FormsController extends AbstractController{
                 ]);
             }
             
+        }
+    }
+
+    #[Route('/form-message', 'form.message')]
+    public function formMessage(Request $request, ServiceForms $serv, MessagesRepository $msgRepo): Response{
+
+        if($request->isXmlHttpRequest()){
+            /** @var Users */
+            $user = $this->getUser();
+            if($serv->persistFormMessage($_POST, $user)){
+
+                return new JsonResponse([
+                    // 'content' => $this->renderView('pages/message-body.html.body', [
+                    //     'messages' => $msgRepo->findAll(),
+                    // ]),
+                    'status' => "success",
+                ]);
+            }else{
+                return new JsonResponse(['status' => "failed"]);
+            }
         }
     }
 }
