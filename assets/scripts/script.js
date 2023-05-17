@@ -263,12 +263,6 @@ $(document).ready(function(){
             
         }
 
-        /**
-         * 
-         */
-        profileImageChange(img, inputFile){
-        }
-
         async fetchImage(url, inputFile){
             const form = new FormData()
             form.append("file", $(inputFile).prop('files')[0].name)

@@ -222,79 +222,23 @@ section{
     }
 }
 
-#form-login{
-    color: white;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    .form-item{
-        margin: 10px 0;
-        position: relative;
+// error connexion login
+div.alert{
+    background-color: #eb1d32f3;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 19px;
+    color: rgb(234, 231, 231);
+    animation: 1s split linear;
+}
+
+@keyframes split {
+    0%{
+        transform: translateY(-50px);
     }
-    .form-item:nth-child(3){
-        display: flex;
-        align-items: center;
-        margin: 0 0 10px 0;
-        label{
-            cursor: pointer;
-        }
+    100%{ 
+        transform: translateY(0px);
     }
-    input{
-        height: 35px;
-        width: 100%;
-        outline: none;
-        background-color: rgba(37, 37, 37, 0.88);
-        border: 1px solid transparent;
-        border-radius: 5px;
-        color: black;
-        padding-left: 10px;
-        transition: all .4s;
-        &:focus{
-            border: 1px solid white;
-            box-shadow: 1px 3px 7px -1px white;
-            background-color: white;
-            color: black;
-        }
-        &[type="checkbox"]{
-            width: 15px;
-            margin-right: 7px;
-            &:focus{
-                box-shadow: none;
-            }
-        }
-    }
-    #eye{
-        color: black;
-        cursor: pointer;
-        position: absolute;
-        top: 22%;
-        right: 10px;
-    }
-    button{
-        height: 35px;
-        color: white;
-        outline: none;
-        cursor: pointer;
-        border: 1px solid transparent;
-        border-radius: 20px;
-        margin-bottom: 20px;
-        background-color: rgba(37, 37, 37, 0.88);
-        transition: all .4s;
-        &:hover{
-            background-color: $light-color;
-            color: black;
-        }
-    }
-    .footer{
-        text-align: center;
-        color: gray;
-        a{
-            color: gray;
-            transition: all .3s;
-            &:hover{
-                text-decoration: underline;
-                color: white;
-            }
-        }
-    }
+    
 }
