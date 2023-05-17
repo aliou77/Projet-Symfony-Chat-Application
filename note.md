@@ -20,8 +20,9 @@
  <!-- - afficher les messages dans le chat instantanement -->
 
 <!-- - mettre l'effet de chargement de page dans les requettes ajax  -->
-- fix les conctacts dont l'ajax ne s'applique pas apres une recherche
+<!-- - fix les conctacts dont l'ajax ne s'applique pas apres une recherche -->
 - organiser l'affichage des error d'invalidation dans page connexion
+- ajouter le remember me
 - setup audio send
 - creer un service pour rediger les slug que les users pourais modifier
 - setup setting
