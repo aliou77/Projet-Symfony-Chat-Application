@@ -23,6 +23,10 @@ security:
             form_login:
                 login_path: 'login'
                 check_path: 'login' # chemin utiliser pour la verification du user
+                
+            remember_me:
+                secret:   '%kernel.secret%' # required
+                lifetime: 604800 # 1 week in seconds
 
             custom_authenticator: App\Security\UsersAuthenticator
             entry_point: form_login

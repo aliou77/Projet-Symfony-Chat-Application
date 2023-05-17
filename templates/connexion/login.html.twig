@@ -7,11 +7,11 @@
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    {% if app.user %}
+    {# {% if app.user %}
         <div class="mb-3">
             You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
-    {% endif %}
+    {% endif %} #}
     <main>
         <section>
             <div class="header">
@@ -26,6 +26,10 @@
                     <div id="eye">
                         <i class="fa-solid fa-eye"></i>
                     </div>
+                </div>
+                <div class="form-item">
+                    <input type="checkbox" name="_remember_me" id="remember">
+                    <label for="remember">Remember me</label>
                 </div>
                 <button type="submit">Log In</button>
                 <div class="footer">
