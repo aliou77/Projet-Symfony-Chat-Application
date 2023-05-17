@@ -39,18 +39,21 @@ class FormsController extends AbstractController{
         }
     }
 
-    #[Route('/form-message', 'form.message')]
-    public function formMessage(Request $request, ServiceForms $serv, MessagesRepository $msgRepo): Response{
-
+    #[Route('/form-message-{id}', 'form.message')]
+    public function formMessage(Request $request, ServiceForms $serv,int $id, MessagesRepository $msgRepo): Response{
+       
+         // recupere les message
+        // dd($message[count($message)-1]);
         if($request->isXmlHttpRequest()){
             /** @var Users */
             $user = $this->getUser();
-            if($serv->persistFormMessage($_POST, $user)){
-
+            if($serv->persistFormMessage($_POST, $user, $id)){ // $id = recepient_id
+                $message = $msgRepo->findMessages($user->getId(), $id);
+                $lastMsg = $message[count($message)-1];
                 return new JsonResponse([
-                    // 'content' => $this->renderView('pages/message-body.html.body', [
-                    //     'messages' => $msgRepo->findAll(),
-                    // ]),
+                    'content' => $this->renderView('pages/last-message-send.html.twig', [
+                        'message' => $lastMsg,
+                    ]),
                     'status' => "success",
                 ]);
             }else{
@@ -58,4 +61,5 @@ class FormsController extends AbstractController{
             }
         }
     }
+    
 }

@@ -1264,12 +1264,57 @@ footer{
     }
 }
 
+// ----------------------------- //
+//          CSS EFFETS          
+// ----------------------------- //
+
 // effet de chargement 
 div#loader {
    @include loading-effect();
 }
   
+// effet de chargment du message
+p.loading-msg{
+    display: flex;
+    // justify-content: center;
+    // background: white;
+    // padding: 10px 0;
+    span{
+        height: 5px;
+        width: 5px;
+        margin: 0 3px;
+        border-radius: 50%;
+        background-color: black;
+        animation: 4s loading linear infinite;
+        &:nth-child(1){
+            animation-duration: .5s;
+        }
+        &:nth-child(2){
+            animation-duration: .6s;
+        }
+        &:nth-child(3){
+            animation-duration: .7s;
+        }
+    }
+}
 
+@keyframes loading {
+    0%{
+        transform: scale(1.2);
+    }
+    50%{
+        transform: scale(1.4);
+    }
+    60%{
+        transform: scale(1.5);
+    }
+    80%{
+        transform: scale(1.6);
+    }
+    100%{
+        transform: scale(1.7);
+    }
+}
 
 /* media queries */
 

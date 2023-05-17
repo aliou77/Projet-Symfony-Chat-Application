@@ -7,8 +7,10 @@
 // }
 
 
+
 // $("#success").fadeOut(3000)
 $(document).ready(()=>{
+
     $("#form-setting").on("submit",function(e){
         e.preventDefault()
         const action = $(this).attr("action")
@@ -74,7 +76,6 @@ $(document).ready(()=>{
     // message section ajax 
     const get_started = $("div.get-started")
     const user_chat = $("section.user-chat")
-
     // console.log("avant click: "+chat_section)
     $("#contact div.contact a").each(function(i, item){
         $(item).on("click", function(e){
@@ -94,20 +95,99 @@ $(document).ready(()=>{
                         user_chat.removeClass('active')
                         user_chat.html(res.content)
                         $("div.chat-section").css('display', 'block')
+                        // $("form#form-chat").children('input[type="text"]').focus()
                         // renvoie le user au bottom de la discussion
-                        const body = document.querySelector("div.body")
-                        body.scrollTop = body.scrollHeight
+                        goToBottom()
                         // active la feat du modal
                         showModal($(".chat-section .icons .more"), $(".chat-section #close-profile"))
                         // envoie le form du chat en ajax
                         sendChatForm()
+                        
+                        // charger le chat body
+                        var loader;
+                        const interval = setInterval(bodyChatLoading, 3000)
+                        loader = interval
+                        $("form#form-chat").children('input[type="text"]').focusout((e)=>{
+                            const interval = setInterval(bodyChatLoading, 3000)
+                            loader = interval
+                        })
+                        $("form#form-chat").children('input[type="text"]').on('focus', (e)=>{
+                            clearInterval(loader)
+                        })
 
+                        // $("form#form-chat").children('input[type="text"]')
+                        // clearInterval()
+                        
                     }
                 }
             });
         })
 
     }) 
+
+    
+
+    function bodyChatLoading(){
+        const r_id = $("form#form-chat").children("input#to").val(),
+            s_id = $("form#form-chat").children("input#from").val(),
+            data = {r_id: r_id, s_id: s_id}
+
+        // console.log(r_id, s_id)
+        if($("form#form-chat")){
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8081/body-chat",
+                data: {
+                    data: data
+                },
+                dataType: "json",
+                success: function (res) {
+                    // console.log(res)
+                    $("div.body").html(res.content)
+                    goToBottom()
+                }
+            });
+        }
+        
+    }
+    // send messages on the chat section
+   function sendChatForm(){
+        $("form#form-chat").on("submit", function(e){
+            e.preventDefault()
+            const datas = $(this).serializeArray()
+            $('form#form-chat input[type="text"]').val('')
+            // $("div.body").append('<div class="send"><p class="loading-msg"><span></span><span></span><span></span></p></div>')
+            goToBottom()
+            $.ajax({
+                type: "POST",
+                url: $(this).attr('action'),
+                data: datas,
+                dataType: "JSON",
+                success: function (res) {
+                    // console.log(res)
+                    if(res.status == "success"){
+
+                        // $("div.body div.send").each(function(i, div){
+                        //     if($(div).children('p').hasClass('loading-msg')){
+                        //         $(div).html(res.content)
+                        //     }
+                        // })
+                        $("div.body").append(res.content)
+                        // bodyChatLoading() // refraish body chat
+                        goToBottom()
+                    }
+                }
+            });
+
+        })
+
+    }
+
+    // move the body chat to the bottom
+    function goToBottom(){
+        const body = document.querySelector("div.body")
+        body.scrollTop = body.scrollHeight
+    }
 
     function showModal(icon, close){
        $(icon).on("click", function(){
@@ -119,32 +199,11 @@ $(document).ready(()=>{
        })
    }
 
-   // send messages on the chat section
-   function sendChatForm(){
 
-        $("form#form-chat").on("submit", function(e){
-            e.preventDefault()
-            const datas = $(this).serializeArray()
-            $('form#form-chat input[type="text"]').val('')
-            $.ajax({
-                type: "POST",
-                url: $(this).attr('action'),
-                data: datas,
-                dataType: "JSON",
-                success: function (res) {
-                    // console.log(res)
-                    if(res.status == "success"){
-                        // console.log(res)
-                    }
-                }
-            });
 
-        })
-
-        // console.log($("form#form-chat"))
-   }
-
-   console.log(document.readyState)
    
+
+//    console.log(document.readyState)
+
         
 })

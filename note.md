@@ -16,8 +16,10 @@
  <!-- + apres le click sur un contact ou message on recuper le user selectionner on affiche ses infos dans la chat section et dans le modal -->
  <!-- + on envyoie les messages, on les stock en DB -->
  <!-- + on les reaffiche pour chaque user selectionnet, et on renvoie une vue en json content toutes la section message les infos du user et les messages lui concernant. -->
-- mettre l'effet de chargement de page dans les requettes ajax 
 
+ - afficher les messages dans le chat instantanement
+
+<!-- - mettre l'effet de chargement de page dans les requettes ajax  -->
 - fix les conctacts dont l'ajax ne s'applique pas apres une recherche
 - organiser l'affichage des error d'invalidation dans page connexion
 - setup audio send
@@ -101,3 +103,22 @@ si aucun user n'est connecter on le renvoie vers la page login avec ($this->getU
 # NB: pour le corriger le probleme peut etre qu'il faut que la route commence par qlq chose comme le ^/admin
 -- la logique etait exacte fallait modifier l'url a utiliser pour home '/' en '^/home'
 # NB: le entry_point est point d'entrer, lorsqu'une route est configurer dans <access_control:> comme ici ^/home
+
+------------ installation symfony cli ---------------------
+# step 1:
+ouvrir powershell et taper => iwr -useb get.scoop.sh | iex
+install scoop l'outil qui sera utiliser pour installation de symfony cli
+# NB: 
+en cas d'erreur de permition policy executer la command =>  Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+# step 2:
+installation symfony cli => scoop install symfony-cli
+# tester symfony cli:
+tapper symfony 
+
+---------------- INSTALLATION DE UTILISATION DE MERCURE (protocol utilisant le system de HUB) -----------------------------
+# steps:
+- telecharger mercure depuis le site officiel => https://github.com/dunglas/mercure/releases
+- puis installer mercureBundle => composer require mercure
+- puis configurer le bundle pour son utilisation
+command: $env:MERCURE_PUBLISHER_JWT_KEY='!ChangeThisMercureHubJWTSecretKey!'; $env:MERCURE_SUBSCRIBER_JWT_KEY='!ChangeThisMercureHubJWTSecretKey!'; .\mercure.exe run --config Caddyfile.dev
+

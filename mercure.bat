@@ -1,0 +1,1 @@
+$env:MERCURE_PUBLISHER_JWT_KEY='aliou'; $env:MERCURE_SUBSCRIBER_JWT_KEY='aliou'; .\mercure\mercure.exe run --config Caddyfile.dev

@@ -13,6 +13,8 @@ import './fontawesome/css/all.css';
 import './scripts/script';
 import './fontawesome/js/all';
 import './scripts/ajax/ajax';
+// import node client test
+// import './scripts/nodejs/client'
 // import SlideBarDatas from './scripts/ajax/SlideBarDatas'
 
 

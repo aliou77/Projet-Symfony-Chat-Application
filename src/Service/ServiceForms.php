@@ -20,18 +20,18 @@ class ServiceForms {
         $this->repo = $repo;
     }
 
-    public function persistFormMessage(array $datas, Users $user){
+    public function persistFormMessage(array $datas, Users $user, $recepient_id){
         
         if($this->isVerified($datas)){
             extract($datas);
             $msg = new Messages();
             $msg
                 ->setSenderId($user)
-                ->setRecepientId($user_receiving)
+                ->setRecepientId($recepient_id)
                 ->setMessage($message)
                 ->setCreatedAt(new DateTimeImmutable())
             ;
-            $this->repo->save($msg, true);
+            $this->repo->save($msg, true); 
             return true;
         }
         return false;
