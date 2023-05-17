@@ -45,7 +45,8 @@ $(document).ready(()=>{
         $("form.contact").children("input").focus()
     })
 
-    // search form contact 
+    // search form contact
+    
     $("form.contact").submit((e)=>{
         e.preventDefault()
     })
@@ -65,65 +66,71 @@ $(document).ready(()=>{
                 // console.log(res)
                 if(res.status == "success"){
                     $(content).html(res.content)
+                    // appliquer le layout chat section apres une recherche
+                    chatSectionLayout()
                 }else if(res.status == "not-found"){
                     $(content).html("<p style='text-align: center;'>User Not Found !</p>")
                 }
             }
         });
     })
+    
+    
 // ------------------------------------------------------------
 
     // message section ajax 
-    const get_started = $("div.get-started")
-    const user_chat = $("section.user-chat")
-    // console.log("avant click: "+chat_section)
-    $("#contact div.contact a").each(function(i, item){
-        $(item).on("click", function(e){
-            e.preventDefault()
-            const url = $(this).attr('href')
-            get_started.css('display', 'none')
-            // effet de chargement
-            user_chat.html('<div style="display: flex; justify-content: center;"><div id="loader"></div></div>')
-            user_chat.addClass('active')
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: "",
-                dataType: "JSON",
-                success: function (res) {
-                    if(res.status == 'success'){
-                        user_chat.removeClass('active')
-                        user_chat.html(res.content)
-                        $("div.chat-section").css('display', 'block')
-                        // $("form#form-chat").children('input[type="text"]').focus()
-                        // renvoie le user au bottom de la discussion
-                        goToBottom()
-                        // active la feat du modal
-                        showModal($(".chat-section .icons .more"), $(".chat-section #close-profile"))
-                        // envoie le form du chat en ajax
-                        sendChatForm()
-                        
-                        // charger le chat body
-                        var loader;
-                        const interval = setInterval(bodyChatLoading, 3000)
-                        loader = interval
-                        $("form#form-chat").children('input[type="text"]').focusout((e)=>{
-                            const interval = setInterval(bodyChatLoading, 3000)
-                            loader = interval
-                        })
-                        $("form#form-chat").children('input[type="text"]').on('focus', (e)=>{
-                            clearInterval(loader)
-                        })
-
-                        // $("form#form-chat").children('input[type="text"]')
-                        // clearInterval()
-                        
+    function chatSectionLayout(){
+        const get_started = $("div.get-started")
+        const user_chat = $("section.user-chat")
+        // console.log("avant click: "+chat_section)
+        $("#contact div.contact a").each(function(i, item){
+            $(item).on("click", function(e){
+                e.preventDefault()
+                const url = $(this).attr('href')
+                get_started.css('display', 'none')
+                // effet de chargement
+                user_chat.html('<div style="display: flex; justify-content: center;"><div id="loader"></div></div>')
+                user_chat.addClass('active')
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: "",
+                    dataType: "JSON",
+                    success: function (res) {
+                        if(res.status == 'success'){
+                            user_chat.removeClass('active')
+                            user_chat.html(res.content)
+                            $("div.chat-section").css('display', 'block')
+                            // $("form#form-chat").children('input[type="text"]').focus()
+                            // renvoie le user au bottom de la discussion
+                            goToBottom()
+                            // active la feat du modal
+                            showModal($(".chat-section .icons .more"), $(".chat-section #close-profile"))
+                            // envoie le form du chat en ajax
+                            sendChatForm() 
+                            // charger le chat body
+                            var loader;
+                            // const interval = setInterval(bodyChatLoading, 3000)
+                            // loader = interval
+                            // $("form#form-chat").children('input[type="text"]').focusout((e)=>{
+                            //     const interval = setInterval(bodyChatLoading, 3000)
+                            //     loader = interval
+                            // })
+                            // $("form#form-chat").children('input[type="text"]').on('focus', (e)=>{
+                            //     clearInterval(loader)
+                            // })
+                            
+                            
+                        }
                     }
-                }
-            });
-        })
+                });
+            })
 
-    }) 
+        }) 
+    }
+
+    // lorsqu'il n'y a pas de rechercher
+    chatSectionLayout()
 
     
 
@@ -157,7 +164,7 @@ $(document).ready(()=>{
             const datas = $(this).serializeArray()
             $('form#form-chat input[type="text"]').val('')
             // $("div.body").append('<div class="send"><p class="loading-msg"><span></span><span></span><span></span></p></div>')
-            goToBottom()
+            // goToBottom()
             $.ajax({
                 type: "POST",
                 url: $(this).attr('action'),
@@ -172,8 +179,8 @@ $(document).ready(()=>{
                         //         $(div).html(res.content)
                         //     }
                         // })
-                        $("div.body").append(res.content)
-                        // bodyChatLoading() // refraish body chat
+                        // $("div.body").append(res.content)
+                        bodyChatLoading() // refraish body chat
                         goToBottom()
                     }
                 }
