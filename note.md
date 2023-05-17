@@ -12,12 +12,12 @@
 <!-- - mettre en place la deconnexion -->
 <!-- - setup profile -->
 <!-- - setup contact search -->
-- setup message
+<!-- - setup message -->
  <!-- + apres le click sur un contact ou message on recuper le user selectionner on affiche ses infos dans la chat section et dans le modal -->
  <!-- + on envyoie les messages, on les stock en DB -->
  <!-- + on les reaffiche pour chaque user selectionnet, et on renvoie une vue en json content toutes la section message les infos du user et les messages lui concernant. -->
 
- - afficher les messages dans le chat instantanement
+ <!-- - afficher les messages dans le chat instantanement -->
 
 <!-- - mettre l'effet de chargement de page dans les requettes ajax  -->
 - fix les conctacts dont l'ajax ne s'applique pas apres une recherche
@@ -121,4 +121,5 @@ tapper symfony
 - puis installer mercureBundle => composer require mercure
 - puis configurer le bundle pour son utilisation
 command: $env:MERCURE_PUBLISHER_JWT_KEY='!ChangeThisMercureHubJWTSecretKey!'; $env:MERCURE_SUBSCRIBER_JWT_KEY='!ChangeThisMercureHubJWTSecretKey!'; .\mercure.exe run --config Caddyfile.dev
+#NB: le plus simple pour utiliser mercure c'est avec docker
 
