@@ -15,4 +15,5 @@ return [
     Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class => ['all' => true],
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
+    Symfony\Bundle\MercureBundle\MercureBundle::class => ['all' => true],
 ];

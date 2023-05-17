@@ -60,7 +60,7 @@ class UsersController extends AbstractController
     }
 
     #[Route('/message-section-{id}', 'message.section')]
-    public function message(Request $request, Users $user,int $id, MessagesRepository $msgRepo){
+    public function message(Request $request, Users $user, int $id, MessagesRepository $msgRepo){
         // on recupere le user sur sur le quel on a clicker ($user)
         if($request->isXmlHttpRequest()){
             /** @var Users */
@@ -70,6 +70,7 @@ class UsersController extends AbstractController
                 'content' => $this->renderView('pages/message-section.html.twig', [
                     'user' => $user,
                     'messages' => $messages,
+                    'user_sending' => $user_sending
                 ]),
                 'status' => 'success'
             ]);

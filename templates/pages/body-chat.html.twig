@@ -1,0 +1,16 @@
+{% for m in messages %}
+
+    {% if m.recepientId == user.id %}
+        <div class="send">
+            <p>{{ m.message|nl2br }} <span id="hour">{{ m.createdAt|date('H:i') }}</span></p>
+        </div>
+        
+    {% else %}
+        <div class="receive">
+            <div class="receive-img">
+                <img src="{{ vich_uploader_asset(user, 'imageFile' )}}" alt="{{user.fname}} {{user.lname}}">
+            </div>
+            <p>{{ m.message|nl2br }} <span id="hour">{{ m.createdAt|date('H:i') }}</span></p>
+        </div>
+    {% endif %}
+{% endfor %}

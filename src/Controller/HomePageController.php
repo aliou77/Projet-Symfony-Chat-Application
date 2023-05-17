@@ -4,11 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Users;
 use App\Form\UsersType;
+use App\Repository\MessagesRepository;
 use App\Repository\UsersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mercure\Publisher;
+use Symfony\Component\Mercure\Update;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomePageController extends AbstractController
@@ -32,38 +35,41 @@ class HomePageController extends AbstractController
         ]);
     }
 
-    /**
-     * chemin pour recuperer les messages des users
-     */
-    #[Route("/message-user-{id}", 'user.message')]
-    public function message(){
-        
+    #[Route('/body-chat', 'body.chat')]
+    public function bodyChat(Request $request, MessagesRepository $repo, UsersRepository $userRepo){
+        $r_id = $request->get('data')['r_id'];
+        $s_id = $request->get('data')['s_id'];
+        $messages = $repo->findMessages($s_id, $r_id);
+        $user = $userRepo->find($r_id);
+        return new JsonResponse([
+            'content' => $this->renderView("pages/body-chat.html.twig", [
+                'messages' => $messages,
+                'user' => $user,
+            ])
+        ]);
+
+        if($request->isXmlHttpRequest()){
+    
+        }
+
     }
 
-    // #[Route('/contact', name: 'contact')]
-    // public function contact(UsersRepository $repo): Response
-    // {
-    //     // render only json data
-    //     // return $this->json(['data' => 'bonjour guys']);
-    //     $contacts = $repo->findUsersByOrder();
-    //     // $sort = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 
-    //     //             'y', 'z'];
-    //     return new JsonResponse([
-    //         'content' => $this->renderView('pages/contact.html.twig', [
-    //             'contacts' => $contacts,
-    //             // 'sort' => $sort,
-    //             ])
-    //     ]);
-    // }
+    // exemple d'utilisation de mercure
+    #[Route("/ping", 'ping', methods: ["POST"])]
+    public function ping(Publisher $publisher){ 
+        // #NB: les data doivent etre serializer => la serialisation c'est de transformer des donnees en json
+        $update = new Update('http://chat-app.com/chat', "[salut je suis la data]");
+        
+        // publisher permet d'envoyer l'update a notre hub
+        $publisher($update);
 
-    // #[Route('/profile', name: 'profile')]
-    // public function profile(): Response{
+        // ici on envoie des donneer depuis le server vers notre client qui est le navigateur avec le $publisher($update);
+        // et les donnee seront receptionner et traiter par le code JS mit en bas du base.html.twig
 
-    //     return new JsonResponse([
-    //         'content' => $this->renderView('pages/profile.html.twig', [
-    //                 'user' => $this->getUser(),
-    //         ])
-    //     ]);
-    // }
+        // -----------------------
+        // puis rediriger vers le home
+        return $this->redirectToRoute('home');
+    }
+
 
 }
