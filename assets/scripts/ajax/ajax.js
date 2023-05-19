@@ -8,30 +8,69 @@
 
 
 
+
 // $("#success").fadeOut(3000)
 $(document).ready(()=>{
 
     $("#form-setting").on("submit",function(e){
         e.preventDefault()
         const action = $(this).attr("action")
-        $.ajax({
-            type: "POST",
-            url: action,
-            data: $(this).serializeArray(),
-            dataType: "json",
-            success: function (response) {
-                if(response.status == "success"){    
-                    location.reload()                
-                    setFlash($("#success"), response)
-                    // setField(this, response.user)
-                }else if(response.status == "failed"){
-                    setFlash($("#failed"), response)
-                }
+        var bool = true;
+        // const p_img = ($("input#file1").val()).replace('C:\\fakepath\\', '') 
+        // const b_img = ($("input#file2").val()).replace('C:\\fakepath\\', '') 
+        // console.log(p_img, b_img)
+        // verification des champs
+        $('#form-setting input').each(function(i, input){
+            if($(this).prop('type') == 'text' || $(this).prop('type') == 'email'){
+                if($(this).val() == ''){
+                    $(this).css('border-color', 'red').css("background-color", "#ff000080")
+                    bool = false;
+                }  
             }
-        });
+        })
+        // si aucun champs n'est vide on send le form
+        if(bool){
+            const data = new FormData(this)
+            // data.append("p_img", p_img)
+            // data.append("b_img", b_img)
+            // console.log(data.getAll('p_img')) affiche les proprietes correspondante ou data.get('b_img')
+            // sendUserDatas(action, data)
+            $.ajax({
+                type: "POST",
+                url: action,
+                data: data,
+                dataType: "json",
+                mimeType: "multipart/form-data",
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    // console.log(response)
+                    if(response.status == "success"){    
+                        location.reload()                
+                        setFlash($("#success"), response)
+                        // setField(this, response.user)
+                    }else if(response.status == "failed"){
+                        setFlash($("#failed"), response)
+                    }
+                }
+            });
+        }
         
 
     })
+    async function sendUserDatas(url, data){
+        const res = await fetch(url, {
+            headers: {
+                'X-Requested-Width': 'XMLHttpRequest'
+            },
+            method: "POST",
+            body: data,
+        })
+        if(res.ok){
+            const data = await res.json()
+            console.log(data)
+        }
+    }
 
     function setFlash(element, data){
         element.attr('id', data.status)
@@ -89,8 +128,17 @@ $(document).ready(()=>{
                 const url = $(this).attr('href')
                 get_started.css('display', 'none')
                 // effet de chargement
-                user_chat.html('<div style="display: flex; justify-content: center;"><div id="loader"></div></div>')
-                user_chat.addClass('active')
+                user_chat.html('<div class="loader-content active"><div id="loader"></div></div>')
+                if(document.body.offsetWidth <= 885){
+                    $(".loader-content").addClass('active')
+                }else{
+                    $(".loader-content").removeClass('active')
+                }
+                // user_chat.addClass('active').css('display', 'flex').css('align-items', 'center').css("justify-content", 'center')
+                
+                // retire le margin-top du main pour eviter que les tas-contents se voie en bas de page
+                $("main.main-content").css('margin-top', '0')
+                
                 $.ajax({
                     type: "POST",
                     url: url,
@@ -98,7 +146,7 @@ $(document).ready(()=>{
                     dataType: "JSON",
                     success: function (res) {
                         if(res.status == 'success'){
-                            user_chat.removeClass('active')
+                            user_chat.removeClass('active').css('display', 'block')
                             user_chat.html(res.content)
                             $("div.chat-section").css('display', 'block')
                             // $("form#form-chat").children('input[type="text"]').focus()
@@ -108,6 +156,13 @@ $(document).ready(()=>{
                             showModal($(".chat-section .icons .more"), $(".chat-section #close-profile"))
                             // envoie le form du chat en ajax
                             sendChatForm() 
+                            
+                            // cache la chat-section apres un click sur la flex
+                            $("div.chat-section .show-hide-arrow-chat").click(function(){
+                                $("div.chat-section").css('display', 'none')
+                                // rajoute le margin-top du main pour afficher les tabs-contents
+                                $("main.main-content").css('margin-top', '4.5rem')
+                            })
                             // charger le chat body
                             var loader;
                             // const interval = setInterval(bodyChatLoading, 3000)

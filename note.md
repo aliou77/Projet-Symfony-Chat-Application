@@ -21,25 +21,27 @@
 
 <!-- - mettre l'effet de chargement de page dans les requettes ajax  -->
 <!-- - fix les conctacts dont l'ajax ne s'applique pas apres une recherche -->
-- organiser l'affichage des error d'invalidation dans page connexion
-- ajouter le remember me
+<!-- - organiser l'affichage des error d'invalidation dans page connexion -->
+<!-- - ajouter le remember me -->
+# --------------------------------------------------------------------------- #
+<!-- - modifier les img profile et back- utiliser fetch au lieu d'ajax
+    on ne peut recuperer le tmp_path avec l'ajax donc on ne peut changer les imgs -->
+<!-- - responsive de la hommepage -->
+<!-- - appliquer l'effet de chargement de la discussion -->
+<!-- - centrer la photo du setting -->
+<!-- - modifier les touch arrow pour la navigation des tabs (up et down) -->
+- afficher les discussions dans messages avec le you: ... 
 - setup audio send
+- ajouter l'envoie des emoji
+- verifier tous les champs avec l'ajax, verifier les champs avant l'envoie des datas comme dans le form-setting 
 - creer un service pour rediger les slug que les users pourais modifier
-- setup setting
+<!-- - setup setting
     photo profile et le background-img
     pour la modification des image, il faut renvoyer le user dans une page ou il soumet un form content les images qui seront updater en php, pour utiliser l'axaj il faut nodejs.
     il sera renvoyer a la page lors du click sur le svg <pen>, un popup s'ouvre avec un form pour changer les images profile et back
-    apres submition. utiliser <vichUploader>
+    apres submition. utiliser <vichUploader> -->
 
 # --------------------------------------------------------------------------- #
-- configuration de la homepage
-- creation des routes de la homepage
-# --- #
-- dans le controller home, on y met toutes les routes de la slide bar, et a chaque requette on recuperer les donneer pour les traiter dans une vue twig avant de les afficher dans le dom.
-- creer un controller message qui va afficher les message de discutions, lorsqu'on click sur le user dans la partie message
-# --- #
-- affichage des contacts
-# NB: afficher tous les contact sauf le tien 
 
 - ajout de champs dans users pour l'image du profile et le back
 - ajouter l'upload d'image dans l'inscription
