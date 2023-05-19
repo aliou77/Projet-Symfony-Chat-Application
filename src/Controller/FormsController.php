@@ -14,7 +14,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FormsController extends AbstractController{
 
-
+    /**
+     * fais une recherche dans les conctact et return les resultats
+     */
     #[Route('/form-contact', 'form.contact')]
     public function formContact(Request $request, UsersRepository $repo): Response {
 
@@ -39,11 +41,13 @@ class FormsController extends AbstractController{
         }
     }
 
+    /**
+     * persiste les datas provenant du formulaire d'envoie de message
+     */
     #[Route('/form-message-{id}', 'form.message')]
     public function formMessage(Request $request, ServiceForms $serv,int $id, MessagesRepository $msgRepo): Response{
        
          // recupere les message
-        // dd($message[count($message)-1]);
         if($request->isXmlHttpRequest()){
             /** @var Users */
             $user = $this->getUser();
@@ -51,9 +55,9 @@ class FormsController extends AbstractController{
                 $message = $msgRepo->findMessages($user->getId(), $id);
                 $lastMsg = $message[count($message)-1];
                 return new JsonResponse([
-                    'content' => $this->renderView('pages/last-message-send.html.twig', [
-                        'message' => $lastMsg,
-                    ]),
+                    // 'content' => $this->renderView('pages/last-message-send.html.twig', [
+                    //     'message' => $lastMsg,
+                    // ]),
                     'status' => "success",
                 ]);
             }else{

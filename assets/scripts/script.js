@@ -35,9 +35,30 @@ $(document).ready(function(){
                 // gestion de la navigation avec les touches arrow
                 $(tab).keyup((e) => { 
                     let index = null
-                    if(e.key === "ArrowRight"){
+                    if(document.body.offsetWidth < 900){
+                        if(e.key === "ArrowRight"){
+                            index = i == tabs.length -1 ? 0 : i + 1
+                        }else if(e.key === "ArrowLeft"){
+                            index = i == 0 ? tabs.length -1 : i - 1
+                        }else if(e.key === "Home"){ // pour aller au debut
+                            index = 0
+                        }else if(e.key === "End"){ // pour aller a la fin
+                            index = tabs.length -1
+                        }
+                    }else{
+                        if(e.key === "ArrowDown"){
+                            index = i == tabs.length -1 ? 0 : i + 1
+                        }else if(e.key === "ArrowUp"){
+                            index = i == 0 ? tabs.length -1 : i - 1
+                        }else if(e.key === "Home"){ // pour aller au debut
+                            index = 0
+                        }else if(e.key === "End"){ // pour aller a la fin
+                            index = tabs.length -1
+                        }
+                    }
+                    if(e.key === "ArrowDown"){
                         index = i == tabs.length -1 ? 0 : i + 1
-                    }else if(e.key === "ArrowLeft"){
+                    }else if(e.key === "ArrowUp"){
                         index = i == 0 ? tabs.length -1 : i - 1
                     }else if(e.key === "Home"){ // pour aller au debut
                         index = 0
@@ -280,6 +301,7 @@ $(document).ready(function(){
             }
         }
 
+
     }
 
     const w = new Wanna();
@@ -297,5 +319,21 @@ $(document).ready(function(){
         console.log("il ya eu un soucis dans script.js \n" + error)
     }
 
+    document.body.onresize = function(e){
+        // si la chat-section n'est pas dans le DOM on ajoute une marge en top pour la <nav-tabs> 
+        if((document.body.offsetWidth <= 885 && $(".chat-section").length == 0)){
+            console.log($(".chat-section"))
+            $("main.main-content").css('margin-top', '4.5rem').css('transition', 'all .2s')
+        }else{
+            $("main.main-content").css('margin-top', '0')
+        }
+
+        // si la chat-section est en display none on remet le margin-top pour la nav-tabs
+        if($(".chat-section").css('display') == 'none' && document.body.offsetWidth <= 885){
+            $("main.main-content").css('margin-top', '4.5rem')
+        }else{
+            $("main.main-content").css('margin-top', '0')
+        }
+    }
     
 });

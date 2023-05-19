@@ -16,13 +16,13 @@
 body{
     background-color: $light-color;
 }
-main{
+main#root-connexion{
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-section{
+section.connexion{
     display: flex;
     flex-direction: column;
     width: 330px;

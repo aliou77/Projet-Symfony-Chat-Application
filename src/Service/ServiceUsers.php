@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Users;
 use App\Repository\UsersRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Security; // c'est le composant qui recupere le user authentifier getUser()
 
 class ServiceUsers{
@@ -40,6 +41,18 @@ class ServiceUsers{
             return true;
         }
         return false;
+
+            // to update profile and back images but can't don't have tmp_path with ajax
+            // if((isset($p_img) && !empty($p_img))){
+                // $filename= $request->files->get('file');
+                // $uploadedFile = new UploadedFile($path, $filename, "image/png", null, true);
+                // $entity->setAttach($uploadedFile);
+            //     $up = new UploadedFile();
+            //     $user->setProfileImg('');
+            // }
+            // if((isset($b_img) && !empty($b_img))){
+            //     $user->setBackImg('');
+            // }
     }
 
     public function persistProfileImg($datas, Users $user){

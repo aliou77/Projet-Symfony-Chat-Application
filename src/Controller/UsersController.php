@@ -25,7 +25,7 @@ class UsersController extends AbstractController
     #[Route('/user-edit-{id}', name: 'users.edit', methods: ['POST'])]
     public function edit(Request $request, Users $user): Response
     {
-        // dd($this->getUser()->getFname());
+        // return new JsonResponse($request->get('datas'));
         if($request->isXmlHttpRequest()){
             if($this->serv->persistUser($_POST, $user)){
                 // si tout se passe bien on renvoie un pt message 

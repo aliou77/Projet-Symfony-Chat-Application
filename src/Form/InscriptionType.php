@@ -53,7 +53,7 @@ class InscriptionType extends AbstractType
                 'second_options' => ['label' => false, 'attr' => ['placeholder' => 'Comfirm Password']],
             ])
             ->add("imageFile", FileType::class, [
-                'label' => "Choose a image profile",
+                'label' => "Choose an image profile",
                 'required' => false
             ])
         ;
