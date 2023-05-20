@@ -54,5 +54,50 @@ class MessagesRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * recupere tous les discussions faites par le user connecter
+     * @return Messages[]
+     */
+    public function findUserDiscussions(int $id){
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.sender_id = :id OR m.recepient_id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * get all discussions did with others
+     * @return null|Messages[]
+     */
+    public function findLastMessage(int $s_id, int $r_id){
+        $messages = $this->createQueryBuilder('m')
+                ->andWhere('m.sender_id = :s_id AND m.recepient_id = :r_id OR m.sender_id = :r_id AND m.recepient_id = :s_id')
+                ->setParameter('s_id', $s_id)
+                ->setParameter('r_id', $r_id)
+                ->orderBy('m.id', 'ASC')
+                ->getQuery()
+                ->getResult()  
+        ;
+        if($messages){
+            return $messages[count($messages) -1];
+        }
+        return null;
+    }
+
+    /**
+    * @return Users[] contains users match
+    */
+   public function findBySearchTerm(string $search, $userId){
+        return $this->createQueryBuilder('u')
+            ->Where('u.fname LIKE :search OR u.lname LIKE :search')
+            ->andWhere('u.id != :u_id')
+            ->setParameter('search', '%'.$search.'%')
+            ->setParameter('u_id', $userId)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
 }

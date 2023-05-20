@@ -1,0 +1,39 @@
+{% for d in discussions %}
+    {% if d.sender.id != user.id %}
+        {% set other = d.sender  %}
+    {% endif %}
+    {% if d.recepient.id != user.id  %}
+        {% set other = d.recepient %}
+    {% endif %}
+    <a href="{{ path('message.section', {id: other.id}) }}">
+        <div class="user">
+            <div class="user-img">
+                <img src="{{ vich_uploader_asset(other, 'imageFile')}}" alt="{{ other.fname}} {{ other.lname}}">
+                {% if other.status == true %}
+                    <span class="user-active"></span>
+                {% else %}
+                    <span class="user-inactive"></span>
+                {% endif %}
+
+            </div>
+            <div class="user-detail">
+                <h4>{{ other.fname}} {{ other.lname}}</h4>
+                {% if d.sender.id == user.id %}
+                    <p>you: 
+                    {% if d.msg|length > 20 %} 
+                        {{ d.msg|slice(0, 30) }}... 
+                    {% else %}
+                        {{ d.msg }} 
+                    {% endif %} </p>
+                {% else %}
+                <p>{% if d.msg|length > 20 %} 
+                        {{ d.msg|slice(0, 30) }}... 
+                    {% else %} 
+                        {{ d.msg }} 
+                    {% endif %} </p>
+                {% endif %}
+            </div>
+            {# <div class="msg-waiting"><span>9</span></div> #}
+        </div>
+    </a>
+{% endfor %}

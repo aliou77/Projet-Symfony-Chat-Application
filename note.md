@@ -30,11 +30,16 @@
 <!-- - appliquer l'effet de chargement de la discussion -->
 <!-- - centrer la photo du setting -->
 <!-- - modifier les touch arrow pour la navigation des tabs (up et down) -->
-- afficher les discussions dans messages avec le you: ... 
-- setup audio send
+
+<!-- - afficher les discussions dans messages avec le you: ...  -->
+<!-- - affiche le button online sur la section messages pour les users connectes -->
+<!-- - afficher la discussion apres le click -->
+
 - ajouter l'envoie des emoji
+- setup audio send
 - verifier tous les champs avec l'ajax, verifier les champs avant l'envoie des datas comme dans le form-setting 
 - creer un service pour rediger les slug que les users pourais modifier
+- modify status of user when he login and logout
 <!-- - setup setting
     photo profile et le background-img
     pour la modification des image, il faut renvoyer le user dans une page ou il soumet un form content les images qui seront updater en php, pour utiliser l'axaj il faut nodejs.
