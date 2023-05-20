@@ -67,13 +67,39 @@ class UsersRepository extends ServiceEntityRepository
         ;
    }
 
-//    public function findOneBySomeField($value): ?Users
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+   /**
+    * renvoie touts les users qui ont eu une discussion avec le user connecter
+    */
+   public function findUsersDiscussion(){
+        $db = $this->createQueryBuilder('u')
+            ->select('DISTINCT u.id , m.recepient_id')
+            ->leftJoin('u.messages', 'm') // on join a la table messages (ici representer par la property messages qui est dans Users)
+            ->andWhere('m.recepient_id = 16 OR m.sender_id = 16')
+            ->getQuery() // returner le getQuery et le dumper pour voir la composition de la requett
+            ;
+        $ids = $db->getResult();
+        $users = [];
+        
+        foreach($ids as $id){
+            $users[] = [
+                's' => $id['id'],
+                'r' => $id['recepient_id']
+            ]; 
+        }
+        return $users;
+   }
+
+   /**
+    * recupere les ids des users qui chat avec le user connecte
+    * @return array contenant les ids des users a l'exeption de celui qui est connecte
+    */
+   public function findUsersIds($id){
+        return $this->createQueryBuilder('u')
+                ->select('u.id')
+                ->Where('u.id != :id')
+                ->setParameter('id' , $id)
+                ->getQuery()
+                ->getResult()
+            ;
+   }
 }

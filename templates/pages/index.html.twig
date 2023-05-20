@@ -40,99 +40,17 @@
                 <div class="tabs-content" id="tabs-content">
                     <div id="message" class="tabcontent">
                         <h3>Chats</h3>
-                        <div class="search-bar">
-                            <form action="" method="post" id="form-search" class="message">
+                        {# <div class="search-bar">
+                            <form action="{{ path('form.message') }}" method="post" id="form-search" class="message">
                                 <input type="search" placeholder="Search or start new discussion...">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </form>
-                        </div>
+                        </div> #}
                         <div class="all-users">
-                            <h3>All users</h3>
-                            <a href="#">
-                                <div class="user">
-                                    <div class="user-img">
-                                        <img src="./img/back.jpg" alt="user image">
-                                        <span class="user-active"></span>
-                                    </div>
-                                    <div class="user-detail">
-                                        <h4>Mamadou</h4>
-                                        <p>Slt bro c comment ?</p>
-                                    </div>
-                                    <div class="msg-waiting"><span>9</span></div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="user">
-                                    <div class="user-img">
-                                        <img src="./img/back.jpg" alt="user image">
-                                    </div>
-                                    <div class="user-detail">
-                                        <h4>Mamadou</h4>
-                                        <p>Slt bro c comment ?</p>
-                                    </div>
-                                    <div class="msg-waiting"><span>9</span></div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="user">
-                                    <div class="user-img">
-                                        <img src="./img/back.jpg" alt="user image">
-                                    </div>
-                                    <div class="user-detail">
-                                        <h4>Mamadou</h4>
-                                        <p>Slt bro c comment ?</p>
-                                    </div>
-                                    <div class="msg-waiting"><span>9</span></div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="user">
-                                    <div class="user-img">
-                                        <img src="./img/back.jpg" alt="user image">
-                                    </div>
-                                    <div class="user-detail">
-                                        <h4>Mamadou</h4>
-                                        <p>Slt bro c comment ?</p>
-                                    </div>
-                                    <div class="msg-waiting"><span>9</span></div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="user">
-                                    <div class="user-img">
-                                        <img src="./img/back.jpg" alt="user image">
-                                    </div>
-                                    <div class="user-detail">
-                                        <h4>Mamadou</h4>
-                                        <p>Slt bro c comment ?</p>
-                                    </div>
-                                    <div class="msg-waiting"><span>9</span></div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="user">
-                                    <div class="user-img">
-                                        <img src="./img/back.jpg" alt="user image">
-                                    </div>
-                                    <div class="user-detail">
-                                        <h4>Mamadou</h4>
-                                        <p>Slt bro c comment ?</p>
-                                    </div>
-                                    <div class="msg-waiting"><span>9</span></div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="user">
-                                    <div class="user-img">
-                                        <img src="./img/back.jpg" alt="user image">
-                                    </div>
-                                    <div class="user-detail">
-                                        <h4>Mamadou</h4>
-                                        <p>Slt bro c comment ?</p>
-                                    </div>
-                                    <div class="msg-waiting"><span>9</span></div>
-                                </div>
-                            </a>
+                            {# <h3>All users</h3> #}
+
+                            {% include 'forms/form-message.html.twig' %}
+
                             <div id="end">
                             </div>
                         </div>
@@ -147,34 +65,9 @@
                             </form>
                         </div>
                         <div class="contacts-content">
-                            {% for contact in contacts %}
-                                <div class="contact">
-                                    <a href="{{ path('message.section', {id: contact.id}) }}" title="click to message">
-                                        <div class="contact-info">
-                                            <img src="{{ vich_uploader_asset(contact, 'imageFile') }}" alt="{{contact.fname}} {{ contact.lname }}">
-                                            <p>{{contact.fname }} {{ contact.lname }}</p>
-                                        </div>
-                                    </a>
-                                    <div class="more">
-                                        <svg id="btn-dropdown" class="btn-dropdown" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
-                                        </svg>
-                                        <div id="dropdown" class="dropdown">
-                                            <div class="dropdown-item">
-                                                <a href="#">Delete
-                                                    <i class="fa-solid fa-trash-can"></i>
-                                                </a>
-                                            </div>
-                                            <div class="dropdown-item">
-                                                <a href="#">Block
-                                                    <i class="fa-solid fa-ban"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                                                                                                                                                                                  
-                            
-                            {% endfor %}
+
+                            {% include 'forms/form-contact.html.twig' %}
+
                         </div>
                     </div>
 

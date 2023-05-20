@@ -10,7 +10,11 @@
             </div>
             <div class="user-details">
                 <h3>{{user.fname}} {{user.lname}}</h3>
-                <p>Online</p>
+                {% if user.status == true %}
+                    <p class="active">Online</p>
+                {% else %}
+                    <p class="inactive">Offline</p>
+                {% endif %}
             </div>
         </div>
         <div class="icons">

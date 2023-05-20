@@ -73,13 +73,13 @@ $dark-light-color: rgba(0, 0, 0, 0.883);
     animation: fadeEffect 1.2s;
 }
 
-@mixin config-h3(){
+@mixin config-h3($margin: 10px 0){
     font-size: 26px;
     font-weight: 500;
-    margin: 10px 0;
+    margin: $margin;
 }
 
-@mixin active-circle(){
+@mixin active-circle($bg: rgb(45, 194, 65)){
     &::before{
         content: "";
         display: inline-block;
@@ -89,9 +89,9 @@ $dark-light-color: rgba(0, 0, 0, 0.883);
         height: 5px;
         border-radius: 50%;
         margin-bottom: 1px;
-        background-color: rgb(45, 194, 65);}
+        background-color: $bg;}
 }
-@mixin user-active-circle(){
+@mixin user-active-circle($bg: rgb(45, 194, 65)){
     &{
         content: "";
         padding: 5px;
@@ -102,7 +102,8 @@ $dark-light-color: rgba(0, 0, 0, 0.883);
         height: 5px;
         border-radius: 50%;
         margin-bottom: 1px;
-        background-color: rgb(45, 194, 65);}
+        background-color: $bg;
+    }
 }
 
 @mixin loading-effect($border: 8px, $taile: 70px){

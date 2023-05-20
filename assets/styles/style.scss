@@ -272,7 +272,7 @@ header .nav-content{
     padding: 10px;
     overflow: hidden;
     h3{
-        @include config-h3();
+        @include config-h3(10px 0 22px);
     }
     #form-search{
         display: flex;
@@ -354,6 +354,9 @@ header .nav-content{
             .user-active{
                 @include user-active-circle();
             }
+            .user-inactive{
+                @include user-active-circle($bg: gray);
+            }
         }
         .user-detail{
             margin-left: 8px;
@@ -364,6 +367,7 @@ header .nav-content{
             p{
                 font-size: 13px;
                 color: gray;
+                margin-top: 3px;
             }
         }
         #end{
@@ -420,8 +424,6 @@ header .nav-content{
         @include config-height();
         @include config-scrolbar();
         // margin-top: 30px;
-        max-height: 397px;
-        height: 415px;
     }
     .sort-letter{
         display: flex;
@@ -513,8 +515,6 @@ header .nav-content{
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: absolute;
-            top: 0;
             width: 100%;
             padding: 5px 13px;
         }
@@ -854,9 +854,12 @@ header .nav-content{
                 font-size: 18px;
                 font-weight: bold;
             }
-            p{
+            p.active{
                 font-size: 14px;
                 @include active-circle();
+            }
+            p.inactive{
+                @include active-circle(gray);
             }
         }
         .user-status-img img{
@@ -883,7 +886,7 @@ header .nav-content{
     .body{
         background-color: transparent;
         // max-height: 7rem;
-        height: 26rem;
+        height: 27rem;
         overflow-y: scroll;
         @include config-scrolbar-hided();
         p{

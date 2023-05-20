@@ -6,6 +6,7 @@ use App\Entity\Users;
 use App\Form\UsersType;
 use App\Repository\MessagesRepository;
 use App\Repository\UsersRepository;
+use App\Service\ServiceMessage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomePageController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(Request $request, UsersRepository $repo): Response
+    public function index(ServiceMessage $serv, UsersRepository $userRepo): Response
     {
 
         if($this->getUser() == null){
@@ -26,12 +27,16 @@ class HomePageController extends AbstractController
         }
         /** @var Users */
         $user = $this->getUser();
-        $contacts = $repo->findUsersByOrder($user->getId());
+        
+        $contacts = $userRepo->findUsersByOrder($user->getId());
+        // get discussions 
+        $discusions = $serv->getDiscussions($user);
 
         return $this->render('pages/index.html.twig', [
             'controller_name' => 'HomePageController',
             'contacts' => $contacts,
-            'user' => $this->getUser(),
+            'user' => $user,
+            'discussions' => $discusions,
         ]);
     }
 
@@ -69,6 +74,45 @@ class HomePageController extends AbstractController
         // -----------------------
         // puis rediriger vers le home
         return $this->redirectToRoute('home');
+    }
+    #[Route("/test", 'ping')]
+    public function test(UsersRepository $userRepo, MessagesRepository $msgRepo, ServiceMessage $serv){
+        /** @var Users */
+        $user = $this->getUser();
+        // $users = $userRepo->findUsersDiscussion();
+        // foreach($users as $u){
+        //     $msg = $msgRepo->findLastMessage($u['s'], $u['r']);
+        //     $s = $u['s'] != $user->getId() ? $userRepo->find($u['s']) : $u['s'];
+        //     $r = $u['r'] != $user->getId() ? $userRepo->find($u['r']) : $u['r'];
+        //     $discusions[] = [
+        //         'message' => $msg,
+        //         's' => $s, // sender
+        //         'r' => $r, // recepient
+        //     ];
+            
+        // }
+        $ids = $userRepo->findUsersIds($user->getId());
+        // foreach($ids as $id){
+        //     // get the las message with all users whom connected discuss with
+        //     /** @var Messages */
+        //     $msg = $msgRepo->findLastMessage($user->getId(), $id['id']);
+        //     if($msg){
+        //         $connectedId = $user->getId();
+        //         // if user isn't the connected one we get his instance from UsersRepository
+        //         $s = $msg->getSenderId() instanceof Users ? $msg->getSenderId() : $userRepo->find($msg->getSenderId());
+        //         $r = $msg->getRecepientId() instanceof Users ? $msg->getRecepientId() : $userRepo->find($msg->getRecepientId());
+        //         // if connected have been chat with someone we store details
+        //         $discusions[] = [
+        //             'sender' => $s,
+        //             'recepient' => $r,
+        //             'msg' => $msg->getMessage()
+        //         ];
+        //     }
+        // }
+
+        $discusions = $serv->getDiscussions($user);
+        dd($discusions);
+       
     }
 
 

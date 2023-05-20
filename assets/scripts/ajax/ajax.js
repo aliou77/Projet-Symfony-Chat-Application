@@ -16,9 +16,6 @@ $(document).ready(()=>{
         e.preventDefault()
         const action = $(this).attr("action")
         var bool = true;
-        // const p_img = ($("input#file1").val()).replace('C:\\fakepath\\', '') 
-        // const b_img = ($("input#file2").val()).replace('C:\\fakepath\\', '') 
-        // console.log(p_img, b_img)
         // verification des champs
         $('#form-setting input').each(function(i, input){
             if($(this).prop('type') == 'text' || $(this).prop('type') == 'email'){
@@ -31,10 +28,6 @@ $(document).ready(()=>{
         // si aucun champs n'est vide on send le form
         if(bool){
             const data = new FormData(this)
-            // data.append("p_img", p_img)
-            // data.append("b_img", b_img)
-            // console.log(data.getAll('p_img')) affiche les proprietes correspondante ou data.get('b_img')
-            // sendUserDatas(action, data)
             $.ajax({
                 type: "POST",
                 url: action,
@@ -58,6 +51,7 @@ $(document).ready(()=>{
         
 
     })
+
     async function sendUserDatas(url, data){
         const res = await fetch(url, {
             headers: {
@@ -85,44 +79,69 @@ $(document).ready(()=>{
     })
 
     // search form contact
-    
-    $("form.contact").submit((e)=>{
-        e.preventDefault()
-    })
-    $("form.contact").on("keyup", function(){
-        const url = $(this).attr("action")
-        const data = $(this).children('input').val()
-        const content = $("#contact .contacts-content")
-        // console.log(content)
-        $.ajax({
-            type: "GET",
-            url: url,
-            data: {
-                searchTerm: data
-            },
-            dataType: "json",
-            success: function (res) {
-                // console.log(res)
-                if(res.status == "success"){
-                    $(content).html(res.content)
-                    // appliquer le layout chat section apres une recherche
-                    chatSectionLayout()
-                }else if(res.status == "not-found"){
-                    $(content).html("<p style='text-align: center;'>User Not Found !</p>")
+    formSearch($("form.contact"), $("#contact .contacts-content"));
+
+    /**
+     * send search terme to the php controller to get results for contacts
+     * @param {HTMLElement} form the search form
+     * @param {HTMLElement} container the container where result will be push in
+     */
+    function formSearch(form, container, links){
+        $(form).submit((e)=>{
+            e.preventDefault()
+        })
+        $(form).on("keyup", function(){
+            const url = $(this).attr("action")
+            const data = $(this).children('input').val()
+            const content = $(container);
+            // console.log(content)
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: {
+                    searchTerm: data
+                },
+                dataType: "json",
+                success: function (res) {
+                    // console.log(res)
+                    if(res.status == "success"){
+                        $(content).html(res.content)
+                        // appliquer le layout chat section apres une recherche
+                        chatSectionLayout(links)
+                    }else if(res.status == "not-found"){
+                        $(content).html("<p style='text-align: center;'>User Not Found !</p>")
+                    }
                 }
-            }
-        });
+            });
+        })
+
+    }
+    
+    
+    
+    
+// -----------------------------------------------------------
+
+    // search form messages focus
+    $("form.message").children('svg').click(function(e){
+        $("form.message").children("input").focus()
     })
-    
-    
+
+
 // ------------------------------------------------------------
 
     // message section ajax 
-    function chatSectionLayout(){
+    /**
+     * layout the chat section when the connected click on a contact or message and include 
+     * results of searches
+     * @param {HTMLElement} links 
+     */
+    function chatSectionLayout(links){
+
         const get_started = $("div.get-started")
         const user_chat = $("section.user-chat")
         // console.log("avant click: "+chat_section)
-        $("#contact div.contact a").each(function(i, item){
+        $(links).each(function(i, item){
             $(item).on("click", function(e){
                 e.preventDefault()
                 const url = $(this).attr('href')
@@ -184,8 +203,9 @@ $(document).ready(()=>{
         }) 
     }
 
-    // lorsqu'il n'y a pas de rechercher
-    chatSectionLayout()
+    // when click on links without search form contact submit
+    chatSectionLayout($("#contact div.contact a"))
+    chatSectionLayout($("#message div.all-users a"))
 
     
 
@@ -198,7 +218,7 @@ $(document).ready(()=>{
         if($("form#form-chat")){
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8081/body-chat",
+                url: "http://localhost:7000/body-chat",
                 data: {
                     data: data
                 },
