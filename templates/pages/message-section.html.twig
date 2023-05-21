@@ -102,18 +102,23 @@
         </div> #}
     </div>
     <div class="footer">
-        <div class="emoji">
+        <div id="emoji">
             <i class="fa-regular fa-face-smile-beam"></i>
         </div>
         <div class="link">
             <i class="fa-solid fa-paperclip"></i>
         </div>
         <div class="form-chat" id="form-chat">
-            <form action="{{ path('form.message', {id: user.id}) }}" method="post" id="form-chat" autocomplete="off">
+            <form action="{{ path('form.chat', {id: user.id}) }}" method="post" id="form-chat" autocomplete="off">
                 <input type="text" name="message" placeholder="Tape a message...">
                 <input type="hidden" value="{{user.id}}" id="to">
                 <input type="hidden" value="{{user_sending.id}}" id="from">
             </form>
+            <div id="emoji-section">
+                <ul>
+                    <span id="emoji-close"><i class="fa-solid fa-xmark" ></i></span>
+                </ul>
+            </div>
         </div>
         <div class="microphone">
             <i class="fa-solid fa-microphone"></i>

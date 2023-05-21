@@ -36,6 +36,12 @@
 <!-- - afficher la discussion apres le click -->
 
 - ajouter l'envoie des emoji
+---
+129295 => main chutup #form
+129354 => guan box #to
+129392 => heureux glamour #form
+129393, 129395, 129396, 129397, 129398, 129402, 129488,129489,   129505, 129489, 129467
+---
 - setup audio send
 - verifier tous les champs avec l'ajax, verifier les champs avant l'envoie des datas comme dans le form-setting 
 - creer un service pour rediger les slug que les users pourais modifier

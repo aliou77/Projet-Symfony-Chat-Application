@@ -27,6 +27,7 @@ a{
 main.main-content{
     display: flex;
     width: 100%;
+    overflow: hidden;
 }
 
 // ----------------------------- //
@@ -986,6 +987,7 @@ header .nav-content{
         }
     }
     #form-chat{
+        position: relative;
         input{
             width: 100%;
             margin-left: 15px;
@@ -1289,6 +1291,45 @@ header .nav-content{
     }
 }
 
+// ----------------------------- //
+//          emoji css           
+// ----------------------------- //
+
+div#emoji-section{
+    position: absolute;
+    top: -10.6rem;
+    left: 0;
+    background: #151515e6;
+    width: 100%;
+    height: 10rem;
+    overflow-y: scroll;
+    border-radius: 10px;
+    @include config-scrolbar();
+    transform: translateY(20rem);
+    transition: all ease-in-out .4s;
+    &.active{
+        transform: translateY(0);
+    }
+    ul{
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+    }
+    li{
+        font-size: 26px;
+        list-style-type: none;
+        padding: 5px;
+        margin: 5px;
+        cursor: pointer;
+    }
+    #emoji-close{
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        cursor: pointer;
+    }
+}
+
 footer{
     height: 20px;
     padding: 20px 0 27px;
@@ -1354,6 +1395,8 @@ p.loading-msg{
     }
 }
 
+// keyframes
+
 @keyframes loading {
     0%{
         transform: scale(1.2);
@@ -1371,6 +1414,9 @@ p.loading-msg{
         transform: scale(1.7);
     }
 }
+
+
+
 
 /* media queries */
 

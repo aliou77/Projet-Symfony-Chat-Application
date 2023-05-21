@@ -182,6 +182,8 @@ $(document).ready(()=>{
                                 // rajoute le margin-top du main pour afficher les tabs-contents
                                 $("main.main-content").css('margin-top', '4.5rem')
                             })
+
+                            createEmoji()
                             // charger le chat body
                             var loader;
                             // const interval = setInterval(bodyChatLoading, 3000)
@@ -207,7 +209,49 @@ $(document).ready(()=>{
     chatSectionLayout($("#contact div.contact a"))
     chatSectionLayout($("#message div.all-users a"))
 
-    
+    // create emojies
+    function createEmoji(){
+        for (let i = 0; i < 80; i++) {
+            var emoji = 128512
+            $("div#emoji-section ul").append('<li data-code="'+(emoji + i)+'">&#'+ (emoji + i) +';</li>')
+            
+        }
+        $("div#emoji-section ul").append('<li data-code="'+(129392)+'">&#129392;</li>')
+        $("div#emoji-section ul").append('<li data-code="'+(129393)+'">&#129393;</li>')
+        $("div#emoji-section ul").append('<li data-code="'+(129395)+'">&#129395;</li>')
+        $("div#emoji-section ul").append('<li data-code="'+(129396)+'">&#129396;</li>')
+        $("div#emoji-section ul").append('<li data-code="'+(129397)+'">&#129397;</li>')
+        $("div#emoji-section ul").append('<li data-code="'+(129398)+'">&#129398;</li>')
+        $("div#emoji-section ul").append('<li data-code="'+(129402)+'">&#129402;</li>')
+        $("div#emoji-section ul").append('<li data-code="'+(129488)+'">&#129488;</li>')
+        $("div#emoji-section ul").append('<li data-code="'+(129489)+'">&#129489;</li>')
+        for (let i = 0; i < 59; i++) {
+            var emoji = 129295
+            $("div#emoji-section ul").append('<li data-code="'+(emoji + i)+'">&#'+ (emoji + i) +';</li>')
+            
+        }
+        $("div#emoji-section ul").append('<li data-code="'+(129505)+'">&#129505;</li>')
+        $("div#emoji-section ul").append('<li data-code="'+(129489)+'">&#129489;</li>')
+        $("div#emoji-section ul").append('<li data-code="'+(129467)+'">&#129467;</li>')
+
+        // event click to show up emojis
+        $("div.footer #emoji").on('click', function(e){
+            $("div#emoji-section").toggleClass('active')
+        })
+
+        $("#emoji-close").on("click", ()=>{
+            $("div#emoji-section").removeClass("active")
+        })
+
+        // insert emoji in the input chat
+        $("div#emoji-section ul li").each(function(i, li){
+            $(li).on("click", (e)=>{
+                const input = $('#form-chat input[type="text"]')
+                input.val($(input).val() +" "+li.innerHTML)
+            })
+        })
+
+    }
 
     function bodyChatLoading(){
         const r_id = $("form#form-chat").children("input#to").val(),
@@ -218,7 +262,7 @@ $(document).ready(()=>{
         if($("form#form-chat")){
             $.ajax({
                 type: "POST",
-                url: "http://localhost:7000/body-chat",
+                url: "http://localhost:10000/body-chat",
                 data: {
                     data: data
                 },
@@ -246,7 +290,7 @@ $(document).ready(()=>{
                 data: datas,
                 dataType: "JSON",
                 success: function (res) {
-                    // console.log(res)
+                    console.log(res)
                     if(res.status == "success"){
 
                         // $("div.body div.send").each(function(i, div){

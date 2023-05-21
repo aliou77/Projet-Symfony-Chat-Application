@@ -85,19 +85,5 @@ class MessagesRepository extends ServiceEntityRepository
         }
         return null;
     }
-
-    /**
-    * @return Users[] contains users match
-    */
-   public function findBySearchTerm(string $search, $userId){
-        return $this->createQueryBuilder('u')
-            ->Where('u.fname LIKE :search OR u.lname LIKE :search')
-            ->andWhere('u.id != :u_id')
-            ->setParameter('search', '%'.$search.'%')
-            ->setParameter('u_id', $userId)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
     
 }

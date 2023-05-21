@@ -18,9 +18,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomePageController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(ServiceMessage $serv, UsersRepository $userRepo): Response
+    public function index(ServiceMessage $servMsg, UsersRepository $userRepo): Response
     {
-
         if($this->getUser() == null){
             // si aucun utilisateur est connecter on le renvoie vers la page de login
             return $this->redirectToRoute("login");
@@ -30,7 +29,7 @@ class HomePageController extends AbstractController
         
         $contacts = $userRepo->findUsersByOrder($user->getId());
         // get discussions 
-        $discusions = $serv->getDiscussions($user);
+        $discusions = $servMsg->getDiscussions($user);
 
         return $this->render('pages/index.html.twig', [
             'controller_name' => 'HomePageController',
