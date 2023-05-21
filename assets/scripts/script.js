@@ -174,6 +174,7 @@ $(document).ready(function(){
                     $(this).children("svg").removeClass("fa-arrow-right").addClass("fa-arrow-left")
                     $("main .user-chat").css("position", "")
                     $("main .user-chat").css("width",  "100%")
+                    $("main .user-chat").css("height",  "auto")
                 }
             })
 
@@ -300,6 +301,8 @@ $(document).ready(function(){
                 console.log(data)
             }
         }
+
+        
 
 
     }
