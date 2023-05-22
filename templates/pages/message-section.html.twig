@@ -73,24 +73,41 @@
     </div>
     <div class="body">
 
-        {% for m in messages %}
+        {% if messages is not null %}
+            {% for m in messages %}
 
-            {% if m.recepientId == user.id %}
-                <div class="send">
-                    <p>{{ m.message|nl2br }} <span id="hour">{{ m.createdAt|date('H:i') }}</span></p>
-                </div>
-                
-            {% else %}
-                <div class="receive">
-                    <div class="receive-img">
-                        <img src="{{ vich_uploader_asset(user, 'imageFile' )}}" alt="{{user.fname}} {{user.lname}}">
+                {% if m.recepientId == user.id %}
+                    <div class="send">
+                        <p>{{ m.message|nl2br }} <span id="hour">{{ m.createdAt|date('H:i') }}</span></p>
                     </div>
-                    <p>{{ m.message|nl2br }} <span id="hour">{{ m.createdAt|date('H:i') }}</span></p>
-                </div>
-            {% endif %}
-        {% endfor %}
+                    
+                {% else %}
+                    <div class="receive">
+                        <div class="receive-img">
+                            <img src="{{ vich_uploader_asset(user, 'imageFile' )}}" alt="{{user.fname}} {{user.lname}}">
+                        </div>
+                        <p>{{ m.message|nl2br }} <span id="hour">{{ m.createdAt|date('H:i') }}</span></p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p style="text-align: center; font-size: 30px; color: white; margin-top: 20%;">No Discussions</p>
+        {% endif %}
         
 
+        {# <div class="send">
+            <audio src="" type="audio/webm" controls>
+            </audio>
+            <span id="hour-audio">12:45</span>
+        </div>
+        <div class="receive">
+            <div class="receive-img">
+                <img src="./img/back.jpg" alt="">
+            </div>
+            <audio src="" type="audio/webm" controls>
+            </audio>
+            <span id="hour-audio">12:45</span>
+        </div> #}
         {# <div class="send">
             <img class="img-chat" src="./img/back.jpg" alt="">
         </div>
@@ -108,7 +125,7 @@
         <div class="link">
             <i class="fa-solid fa-paperclip"></i>
         </div>
-        <div class="form-chat" id="form-chat">
+        <div class="form-chat-container">
             <form action="{{ path('form.chat', {id: user.id}) }}" method="post" id="form-chat" autocomplete="off">
                 <input type="text" name="message" placeholder="Tape a message...">
                 <input type="hidden" value="{{user.id}}" id="to">
@@ -121,7 +138,10 @@
             </div>
         </div>
         <div class="microphone">
-            <i class="fa-solid fa-microphone"></i>
+            <span id="micro"><i class="fa-solid fa-microphone" ></i></span>
+            <span id="pause"><i class="fa-regular fa-pause-circle" ></i></span>
+            <span id="play"><i class="fa-regular fa-play-circle" ></i></span>
+            <span id="send"><i class="fa-regular fa-paper-plane" ></i></span>
         </div>
     </div>
 </div>

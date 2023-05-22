@@ -44,6 +44,7 @@ class FormsController extends AbstractController{
      */
     #[Route('/form-message', 'form.message')]
     public function formMessage(Request $request, ServiceMessage $serv, MessagesRepository $repo): Response {
+        
         if($request->isXmlHttpRequest()){
             /** @var Users */
             $user = $this->getUser();
@@ -69,7 +70,6 @@ class FormsController extends AbstractController{
      */
     #[Route('/form-chat-{id}', 'form.chat')]
     public function formChat(Request $request, ServiceForms $serv,int $id, MessagesRepository $msgRepo): Response{
-       
          // recupere les message
         if($request->isXmlHttpRequest()){
             /** @var Users */

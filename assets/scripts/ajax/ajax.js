@@ -144,6 +144,7 @@ $(document).ready(()=>{
         $(links).each(function(i, item){
             $(item).on("click", function(e){
                 e.preventDefault()
+                e.stopPropagation()
                 const url = $(this).attr('href')
                 get_started.css('display', 'none')
                 // effet de chargement
@@ -164,6 +165,7 @@ $(document).ready(()=>{
                     data: "",
                     dataType: "JSON",
                     success: function (res) {
+                        // console.log(res)
                         if(res.status == 'success'){
                             user_chat.removeClass('active').css('display', 'block')
                             user_chat.html(res.content)
@@ -174,7 +176,8 @@ $(document).ready(()=>{
                             // active la feat du modal
                             showModal($(".chat-section .icons .more"), $(".chat-section #close-profile"))
                             // envoie le form du chat en ajax
-                            sendChatForm() 
+                            sendChatForm($("form#form-chat")) 
+                            
                             
                             // cache la chat-section apres un click sur la flex
                             $("div.chat-section .show-hide-arrow-chat").click(function(){
@@ -182,8 +185,9 @@ $(document).ready(()=>{
                                 // rajoute le margin-top du main pour afficher les tabs-contents
                                 $("main.main-content").css('margin-top', '4.5rem')
                             })
-
+                            // emoji generation
                             createEmoji()
+
                             // charger le chat body
                             var loader;
                             // const interval = setInterval(bodyChatLoading, 3000)
@@ -195,8 +199,6 @@ $(document).ready(()=>{
                             // $("form#form-chat").children('input[type="text"]').on('focus', (e)=>{
                             //     clearInterval(loader)
                             // })
-                            
-                            
                         }
                     }
                 });
@@ -211,6 +213,7 @@ $(document).ready(()=>{
 
     // create emojies
     function createEmoji(){
+
         for (let i = 0; i < 80; i++) {
             var emoji = 128512
             $("div#emoji-section ul").append('<li data-code="'+(emoji + i)+'">&#'+ (emoji + i) +';</li>')
@@ -225,7 +228,7 @@ $(document).ready(()=>{
         $("div#emoji-section ul").append('<li data-code="'+(129402)+'">&#129402;</li>')
         $("div#emoji-section ul").append('<li data-code="'+(129488)+'">&#129488;</li>')
         $("div#emoji-section ul").append('<li data-code="'+(129489)+'">&#129489;</li>')
-        for (let i = 0; i < 59; i++) {
+        for (let i = 0; i < 59; i++) { 
             var emoji = 129295
             $("div#emoji-section ul").append('<li data-code="'+(emoji + i)+'">&#'+ (emoji + i) +';</li>')
             
@@ -237,11 +240,19 @@ $(document).ready(()=>{
         // event click to show up emojis
         $("div.footer #emoji").on('click', function(e){
             $("div#emoji-section").toggleClass('active')
+            $(this).parent().css('overflow', '')
+            if($("div#emoji-section").hasClass('active')){
+                $(".footer div.form-chat-container").css('overflow', 'visible')
+            }else{
+                $(".footer div.form-chat-container").css('overflow', 'hidden')
+            }
         })
-
         $("#emoji-close").on("click", ()=>{
             $("div#emoji-section").removeClass("active")
+            $(".footer div.form-chat-container").css('overflow', 'hidden')
         })
+
+        
 
         // insert emoji in the input chat
         $("div#emoji-section ul li").each(function(i, li){
@@ -262,7 +273,7 @@ $(document).ready(()=>{
         if($("form#form-chat")){
             $.ajax({
                 type: "POST",
-                url: "http://localhost:10000/body-chat",
+                url: "http://localhost:10200/body-chat",
                 data: {
                     data: data
                 },
@@ -277,37 +288,116 @@ $(document).ready(()=>{
         
     }
     // send messages on the chat section
-   function sendChatForm(){
-        $("form#form-chat").on("submit", function(e){
+   function sendChatForm(form){
+       
+        $(form).on("submit", function(e){
             e.preventDefault()
-            const datas = $(this).serializeArray()
-            $('form#form-chat input[type="text"]').val('')
-            // $("div.body").append('<div class="send"><p class="loading-msg"><span></span><span></span><span></span></p></div>')
-            // goToBottom()
-            $.ajax({
-                type: "POST",
-                url: $(this).attr('action'),
-                data: datas,
-                dataType: "JSON",
-                success: function (res) {
-                    console.log(res)
-                    if(res.status == "success"){
-
-                        // $("div.body div.send").each(function(i, div){
-                        //     if($(div).children('p').hasClass('loading-msg')){
-                        //         $(div).html(res.content)
-                        //     }
-                        // })
-                        // $("div.body").append(res.content)
-                        bodyChatLoading() // refraish body chat
-                        goToBottom()
-                    }
-                }
-            });
-
+            // verify if input has a content before sending form
+            if($(this).children('input[type="text"]').val() == ''){
+                $(this).children('input[type="text"]').css("border-color", "red")
+            }else{
+                chatFormAjax(this)
+                $(this).children('input[type="text"]').css("border-color", "transparent")
+            }
         })
 
+        $("span#send").on("click", (e)=>{
+            if($(form).children('input[type="text"]').val() == ''){
+                $(form).children('input[type="text"]').css("border-color", "red")
+            }else{
+                chatFormAjax(form)
+                $(form).children('input[type="text"]').css("border-color", "transparent")
+            }
+        })
+        $(form).children('input[type="text"]').on('focus', function(){
+            $(this).css("border-color", "transparent")
+        })
+        
     }
+
+    function chatFormAjax(form){
+        // verify if input has a content before sending form
+        const datas = $(form).serializeArray()
+        $('form#form-chat input[type="text"]').val('')
+        // $("div.body").append('<div class="send"><p class="loading-msg"><span></span><span></span><span></span></p></div>')
+        // goToBottom()
+        $.ajax({
+            type: "POST",
+            url: $(form).attr('action'),
+            data: datas,
+            dataType: "JSON",
+            success: function (res) {
+                console.log(res)
+                if(res.status == "success"){
+                    bodyChatLoading() // refraish body chat
+                    goToBottom()
+                }
+            }
+        });
+    }
+
+    // send audio fonctionnality
+    async function sendAudio(micro, pause, play, send){
+        // demande l'authorisation de prendre la main sur les feat audio et video
+        // return une Promesse
+        const divice = navigator.mediaDevices.getUserMedia({audio: true}) // , video: true
+
+        // utilisation de function flecher
+        let chunks = []
+        let recorder;
+        divice.then(stream => {{
+            // when got stream we can recoder (stream is like a permission)
+            recorder = new MediaRecorder(stream)
+
+            // visualize(stream);
+            // when recordering will finish we send it via ajax
+            if(recorder.state == 'inactive'){
+                let blob = new Blob(chunks, {type: 'audio/webm'})
+                // $("#audio").prop('src', URL.createObjectURL(blob))
+                let recor = URL.createObjectURL(blob)
+                const audio = '<audio src="'+ recor +'" type="audio/webm" controls></audio>';
+                
+            }
+
+            // start recording
+            // design for send audio icon
+            $(micro).on("click", function(e){
+                console.log("micro")
+                $(send).css('display', 'block')
+                $(pause).css('display', 'block')
+                $(play).css('display', 'block')
+                $(this).css('animation', '2s toggleColor ease infinite')
+                
+                recorder.start()
+                
+            })
+            $(send).click(function(e){
+                recorder.stop()
+            })
+
+
+            recorder.ondataavailable = e =>{
+                chunks.push(e.data)
+            }
+
+            // var timeout;
+            // timeout = setTimeout(()=>{
+            //     recorder.start()
+            // }, 100)
+            
+
+            
+            // recorder.start(1000);
+            // recorder.pause()
+            // console.log(stream) // return un mediaStrem if user autorise audio uses
+        }})
+        
+    }
+    
+    // sendAudio()
+
+    // design for send audio icon
+    
 
     // move the body chat to the bottom
     function goToBottom(){

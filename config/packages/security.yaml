@@ -23,6 +23,7 @@ security:
             form_login:
                 login_path: 'login'
                 check_path: 'login' # chemin utiliser pour la verification du user
+                enable_csrf: true
                 
             remember_me:
                 secret:   '%kernel.secret%' # required

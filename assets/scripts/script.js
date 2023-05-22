@@ -316,7 +316,7 @@ $(document).ready(function(){
         w.hideSowPassword($("#eye"))
         w.discardEvents()
         w.enableErrorColor($("#form-signup input"))
-        w.createDropdown($(".contacts-content .btn-dropdown"))
+        w.createDropdown($(".contacts-content #btn-dropdown"))
         
     } catch (error) {
         console.log("il ya eu un soucis dans script.js \n" + error)
@@ -324,18 +324,17 @@ $(document).ready(function(){
 
     document.body.onresize = function(e){
         // si la chat-section n'est pas dans le DOM on ajoute une marge en top pour la <nav-tabs> 
-        if((document.body.offsetWidth <= 885 && $(".chat-section").length == 0)){
-            console.log($(".chat-section"))
+        if((document.body.offsetWidth <= 885 && $(".chat-section").length == 0) || $(".chat-section").css('display') == 'none'){
+            // console.log($("main.main-content"))
             $("main.main-content").css('margin-top', '4.5rem').css('transition', 'all .2s')
         }else{
             $("main.main-content").css('margin-top', '0')
         }
 
         // si la chat-section est en display none on remet le margin-top pour la nav-tabs
-        if($(".chat-section").css('display') == 'none' && document.body.offsetWidth <= 885){
-            $("main.main-content").css('margin-top', '4.5rem')
-        }else{
+        if($(".chat-section").css('display') == 'none' && document.body.offsetWidth >= 885){
             $("main.main-content").css('margin-top', '0')
+            $("div.chat-section").css('display', 'block')
         }
     }
     

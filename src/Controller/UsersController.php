@@ -22,6 +22,8 @@ class UsersController extends AbstractController
     {
         $this->serv = $serv;
     }
+
+    
     #[Route('/user-edit-{id}', name: 'users.edit', methods: ['POST'])]
     public function edit(Request $request, Users $user): Response
     {
@@ -44,21 +46,6 @@ class UsersController extends AbstractController
         }
     }
 
-    #[Route('/change-profle-imgs-{id}', name: 'profile-img-change', methods: ['POST'])]
-    public function index(Request $request, Users $user): Response
-    {
-        
-        if($request->isXmlHttpRequest()){
-            // on persist l'image en DB
-            if($this->serv->persistProfileImg($_POST, $user)){
-                return new JsonResponse(['status' => "success"]);
-            }else{
-                return new JsonResponse(['status' => "failed"]);
-            }
-        }
-
-    }
-
     #[Route('/message-section-{id}', 'message.section')]
     public function message(Request $request, Users $user, int $id, MessagesRepository $msgRepo){
         // on recupere le user sur sur le quel on a clicker ($user)
@@ -69,7 +56,7 @@ class UsersController extends AbstractController
             return new JsonResponse([
                 'content' => $this->renderView('pages/message-section.html.twig', [
                     'user' => $user,
-                    'messages' => $messages,
+                    'messages' => $messages == null ? null : $messages,
                     'user_sending' => $user_sending
                 ]),
                 'status' => 'success'
