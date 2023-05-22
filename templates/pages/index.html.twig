@@ -3,7 +3,7 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-
+    
     <main id="root">
 
         <div id="success">
@@ -49,7 +49,7 @@
                         <div class="all-users">
                             {# <h3>All users</h3> #}
 
-                            {% include 'forms/form-message.html.twig' %}
+                            {{  include('forms/form-message.html.twig', {discussions: discussions} ) }}
 
                             <div id="end">
                             </div>

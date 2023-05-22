@@ -35,17 +35,17 @@
 <!-- - affiche le button online sur la section messages pour les users connectes -->
 <!-- - afficher la discussion apres le click -->
 
-- ajouter l'envoie des emoji
----
+<!-- - ajouter l'envoie des emoji -->
+<!-- ---
 129295 => main chutup #form
 129354 => guan box #to
 129392 => heureux glamour #form
 129393, 129395, 129396, 129397, 129398, 129402, 129488,129489,   129505, 129489, 129467
----
-- setup audio send
-- verifier tous les champs avec l'ajax, verifier les champs avant l'envoie des datas comme dans le form-setting 
-- creer un service pour rediger les slug que les users pourais modifier
-- modify status of user when he login and logout
+--- -->
+<!-- - modify status of user when he login and logout -->
+<!-- - setup audio send -->
+<!-- - verifier tous les champs avec l'ajax, verifier les champs avant l'envoie des datas comme dans le form-setting  -->
+<!-- - creer un service pour rediger les slug que les users pourais modifier -->
 <!-- - setup setting
     photo profile et le background-img
     pour la modification des image, il faut renvoyer le user dans une page ou il soumet un form content les images qui seront updater en php, pour utiliser l'axaj il faut nodejs.
@@ -54,39 +54,23 @@
 
 # --------------------------------------------------------------------------- #
 
-- ajout de champs dans users pour l'image du profile et le back
-- ajouter l'upload d'image dans l'inscription
-- pour l'image back on mettra une image par defaut c'est a la connexion que le user pourra modifier l'image
-- y afficher les users
-- afficher les users dans la parties contact
-- ajouter la fonctionnality de la recherche sur les contact avec l'ajax (jquery)
-- stocker les messaes envoyer par les users dans la tables messages
-- puis afficher les message text envoyer par chaque user dans le chat
-- mettre en place les messages audio
-- ajout remember me dans la connexion
-- ajouter un effet de chargement de la homepage avec le document.readyState
+<!-- - mettre en place les messages audio -->
+<!-- - ajout remember me dans la connexion -->
+<!-- - ajouter un effet de chargement de la homepage avec le document.readyState -->
 # NB: utiliser wavesurfer pour la lecture des audios link: https://wavesurfer-js.org/api/index.html
-- l'envoie d'image
-- ajouter la fonctinnalite de suppression des messages
-# NB: creer un controller pour la homepage et effectuer des requettes an AXAJ pour la recuperation des donnees
------ a la fin du projet -----------
-- watch grafikart video to understand serialisation and connexion fonctionnalities
-- commprendre les requttes sql avec les join
-
--------- A FAIRE INSHALLAH -----------
-
-
-- effectuer le triage alphabetique sur les contacts
-
 
 -------------------- fonctionnalities -----------------------------
-audio send, emettre un son lors de l'envoie ou reception du message
+<!-- audio send, emettre un son lors de l'envoie ou reception du message
 image send
-capable to download an image or delete it from messages
+capable to download an image or delete it from messages -->
 
 ----------------- En attante -----------------------------
-- ajouter envoie audio
+<!-- - ajouter envoie audio -->
 - possibilite de supprimer un message dans le chat
+----------------------------------------------------------
+- en apprendre plus sur les fonctions async, pour comprendre leur utilisations
+- aussi sur les Promesses
+- en apprendre plus sur symfony avec openclassrooms, surtout la bonne qualite d'un code
 
 <!-- --------------------- creation des entitees ---------------------
 - users et users_deleted => relation manyTOmany et aussi users_blocked
@@ -129,7 +113,7 @@ installation symfony cli => scoop install symfony-cli
 # tester symfony cli:
 tapper symfony 
 
----------------- INSTALLATION DE UTILISATION DE MERCURE (protocol utilisant le system de HUB) -----------------------------
+---------------- INSTALLATION DE UTILISATION DE MERCURE (protocol utilisant le system de HUB) ------------------
 # steps:
 - telecharger mercure depuis le site officiel => https://github.com/dunglas/mercure/releases
 - puis installer mercureBundle => composer require mercure
@@ -137,3 +121,5 @@ tapper symfony
 command: $env:MERCURE_PUBLISHER_JWT_KEY='!ChangeThisMercureHubJWTSecretKey!'; $env:MERCURE_SUBSCRIBER_JWT_KEY='!ChangeThisMercureHubJWTSecretKey!'; .\mercure.exe run --config Caddyfile.dev
 #NB: le plus simple pour utiliser mercure c'est avec docker
 
+--------------------- SUBSCRIBER EVENTS USES ---------------------------
+- php bin/console make:subscriber => to CREATE a event subscriber then you can see all event and choose one

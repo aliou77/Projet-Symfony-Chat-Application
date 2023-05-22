@@ -37,6 +37,6 @@ class ServiceMessage{
             }
         }
 
-        return $discusions;
+        return $discusions ?? null;
     }
 }

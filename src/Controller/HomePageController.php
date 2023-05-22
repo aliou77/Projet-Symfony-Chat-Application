@@ -29,33 +29,30 @@ class HomePageController extends AbstractController
         
         $contacts = $userRepo->findUsersByOrder($user->getId());
         // get discussions 
-        $discusions = $servMsg->getDiscussions($user);
+        $discussions = $servMsg->getDiscussions($user);
 
         return $this->render('pages/index.html.twig', [
             'controller_name' => 'HomePageController',
             'contacts' => $contacts,
             'user' => $user,
-            'discussions' => $discusions,
+            'discussions' => ($discussions == null) ? null : $discussions,
         ]);
     }
 
     #[Route('/body-chat', 'body.chat')]
     public function bodyChat(Request $request, MessagesRepository $repo, UsersRepository $userRepo){
-        $r_id = $request->get('data')['r_id'];
-        $s_id = $request->get('data')['s_id'];
-        $messages = $repo->findMessages($s_id, $r_id);
-        $user = $userRepo->find($r_id);
-        return new JsonResponse([
-            'content' => $this->renderView("pages/body-chat.html.twig", [
-                'messages' => $messages,
-                'user' => $user,
-            ])
-        ]);
-
         if($request->isXmlHttpRequest()){
-    
+            $r_id = $request->get('data')['r_id'];
+            $s_id = $request->get('data')['s_id'];
+            $messages = $repo->findMessages($s_id, $r_id);
+            $user = $userRepo->find($r_id);
+            return new JsonResponse([
+                'content' => $this->renderView("pages/body-chat.html.twig", [
+                    'messages' => $messages,
+                    'user' => $user,
+                ])
+            ]);
         }
-
     }
 
     // exemple d'utilisation de mercure
